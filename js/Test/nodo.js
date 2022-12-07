@@ -16,7 +16,7 @@ class NodoD extends Nodo{
         this.anterior=anterior;
     }
 }
-class NodoLL{
+class NodoLL extends Nodo {
     constructor(info) {
         super(info);
         this.anterior = null;
