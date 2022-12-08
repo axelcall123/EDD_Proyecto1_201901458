@@ -34,16 +34,16 @@ export class listaSimple {
     //SOLO PARA EL LOGIN
     buscar(user,pass){// json
         var aux = this.primero;
-        while (aux != null && user != aux.info.datos()["username"]){
+        while (aux != null && user != aux.info.GetDatos()["username"]){
             //lista.info.usuario
             aux=aux.siguiente;
         }
 
         if(aux==null){//LLEGO FINAL
             return false
-        } else if (pass == aux.info.datos()["password"]){//USUARIO Y CONTRA
+        } else if (pass == aux.info.GetDatos()["password"]){//USUARIO Y CONTRA
             return true
-        }else{//CONTRA MAL
+        }else{//CONTRASEÑA MAL
             return false
         }
     }

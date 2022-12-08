@@ -5,7 +5,7 @@ class musica {
         this.song = song
         this.artist = artist
     }
-    datos() {
+    GetDatos() {
         return {
             month: this.month,
             day: this.day,

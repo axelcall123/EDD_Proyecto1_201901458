@@ -46,7 +46,7 @@
     
                     <div class="row">
                         <div class="col-md-2">
-                            <input type="checkbox" name="" id="">
+                            <input type="checkbox" name="" id="l_checkbox">
                         </div>
                         <div class="col-md-10">
                             Aministrador
@@ -63,7 +63,7 @@
                     <div class="row">
                         <div class="col-sm-6"></div>
                         <div class="col-sm-3">
-                            <button id="b_registroL" type="button">registrarse</button>
+                            <button id="b_registroL" class="lrRC" type="button">registrarse</button>
                         </div>
                         <div class="col-sm-3"></div>
                     </div>
@@ -115,7 +115,8 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="bi bi-phone-fill"></i></div>
                         </div>
-                        <input id="i_telR" type="number" class="form-control" placeholder="Telefono" required>
+                        <input id="i_telR" type="number" class="form-control" placeholder="Telefono" max="8" min="8"
+                            required>
                     </div>
     
                     <div class="input-group mb-2 mr-sm-2">
@@ -128,13 +129,21 @@
     
                     <hr>
                     <div class="row">
-                        <button id="b_registroR" type="button" class="btn btn-sm menu-boton">REGISTRO</button>
+                        <button id="b_registroR" type="submit" class="btn btn-sm menu-boton">REGISTRO</button>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6"></div>
+                        <div class="col-sm-3">
+                            <button id="b_cancelarR" class="lrRC" type="button">cancelar</button>
+                        </div>
+                        <div class="col-sm-3"></div>
                     </div>
                 </form>
             </div>
             <div class="col-md-4"></div>
         </div>
     </div>
+    
     <!--div id="hide">
         <p>HOLISJASKLDFJSKLD</p>
     </div-->

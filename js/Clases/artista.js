@@ -4,7 +4,7 @@ class artista {
         this.age = age
         this.country = country
     }
-    datos() {
+    GetDatos() {
         return {
             name: this.name,
             age: this.age,

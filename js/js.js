@@ -7,25 +7,26 @@ import { hash } from './func/func.js'
 //usuarioC(dpi, name, username, password, phone, admin)
 import { Usuario } from './Clases/usuario.js'
 let usuario = new Usuario(
-    "0", "Alex", "GG", hash("1"), "502", true
+    "0", "Alex", "GG", hash("1"), "12345678", true
 )
 //LISTAS
 import { listaSimple } from './Nodo_Listas/lSimple.js'
-const ls=new listaSimple();
+const lsUsuario=new listaSimple();
 //BOTONES
     //FORMULARIO-LOGIN
-const iUserName = document.getElementById('i_userL')
-const iPassWord = document.getElementById('i_passL')
+const iUserL = document.getElementById('i_userL')
+const iPassL = document.getElementById('i_passL')
 const buttonLogin = document.getElementById('b_login')
+const iCheckL = document.getElementById('l_checkbox')
 let addAdmin=true;
 buttonLogin.addEventListener('click',(e)=>{
     e.preventDefault()
-    
-    if(addAdmin==true){//DEFAULT USER
-        ls.insertarP(usuario);
+    //console.log(iCheckL.checked);
+    if(addAdmin==true){//CREAR DEFAULT USER
+        lsUsuario.insertarP(usuario);
         addAdmin=false
     }
-    if (ls.buscar(iUserName, iPassWord)){//COINCIDENCIA
+    if (lsUsuario.buscar(iUserL, iPassL)){//COINCIDENCIA
         if("A"=="A") true//SI ES ADMIN
     }else{
     }
@@ -43,19 +44,27 @@ buttonIndexRegistro.addEventListener('click',(e)=>{
     //debugger;
     ocultoPLogin.style.display = "none";
     ocultoPRegistro.style.display="block";
+
+    if (addAdmin == true) {//CREAR DEFAULT USER
+        lsUsuario.insertarP(usuario);
+        addAdmin = false
+    }
 })
     //REGISTRARSE
-
-const iUser = document.getElementById('i_userR');
-const iName = document.getElementById('i_nombreR');
-const iDpi = document.getElementById('i_dpiR');
-const iPhone = document.getElementById('i_telR');
-const iPass = document.getElementById('i_passR');
+const iUserR = document.getElementById('i_userR');
+const iNameR = document.getElementById('i_nombreR');
+const iDpiR = document.getElementById('i_dpiR');
+const iPhoneR = document.getElementById('i_telR');
+const iPassR = document.getElementById('i_passR');
 const buttonRegistrarse = document.getElementById('b_registroR')
+
 
 buttonRegistrarse.addEventListener('click', (e) => {
     e.preventDefault()
+    //usuarioC(dpi, name, username, password, phone, admin)
+    let regUsuario = new Usuario(parseInt(iDpiR.value), iNameR.value, iUserR.value, hash(iPassR.value), parseInt(iPhoneR.value),false);
     //debugger;
+    lsUsuario.insertarU(regUsuario);
 })
 /*
     let x = document.getElementById("hide");

@@ -5,7 +5,7 @@ class cancion {
         this.duration = duration
         this.gender=gender
     }
-    datos() {
+    GetDatos() {
         return {
             artist: this.artist,
             name: this.name,
