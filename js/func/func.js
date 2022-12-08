@@ -1,8 +1,4 @@
-/*import {createHash} from "crypto"
-export function hash(string) {
-    return createHash('sha256').update(string).digest('hex');
-}*/
-//console.log(hash("hola"))
+
 export function hash(string) {
     var hashVal = 0;
     if (string.length == 0) return hashVal;
@@ -13,6 +9,11 @@ export function hash(string) {
     }
     return hashVal;
 }
-// var input_str = "I am converting string to hash.";
-// console.log("Input String: " + input_str);
-// console.log("Hash Value: " + hash(input_str));
+
+const delay = ms => new Promise(res => setTimeout(res, ms));
+export const funcAsync = async (tiempo) => {
+    //ESPERA
+    /*await delay(5000);
+    console.log("Waited 5s");*/
+    await delay(tiempo);
+};

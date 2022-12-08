@@ -1,0 +1,18 @@
+[
+{
+	"dpi":3000000000001,
+	"name":"name1",
+	"username":"user1",
+	"password":"a1",
+	"phone":10000001,
+	"admin":false
+},
+{
+	"dpi":3000000000002,
+	"name":"name2",
+	"username":"user2",
+	"password":"a2",
+	"phone":10000002,
+	"admin":false
+}
+]

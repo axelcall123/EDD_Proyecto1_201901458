@@ -1,14 +1,24 @@
+/*NOTAS: e=event
+*/
+
 //DIV OCULTO DEFAULT
-const ocultoPRegistro = document.getElementById('d-register');
-ocultoPRegistro.style.display = 'none';
+    //REGISTRO
+const ocultoPageRegistro = document.getElementById('d-register');
+ocultoPageRegistro.style.display = 'none';
+    //MASTER
+const ocultoPageMaster = document.getElementById('d-master');
+ocultoPageMaster.style.display = 'none';
 //FUNCIONES
 import { hash } from './func/func.js'
+import {funcAsync } from './func/func.js'
 //CREAR ADMIN DEFAULT
-//usuarioC(dpi, name, username, password, phone, admin)
 import { Usuario } from './Clases/usuario.js'
-let usuario = new Usuario(
+//(dpi, name, username, password, phone, admin) GG;1
+var usuario = new Usuario(
     "0", "Alex", "GG", hash("1"), "12345678", true
 )
+//VAR LET CONST OTRA
+var addAdmin = true;
 //LISTAS
 import { listaSimple } from './Nodo_Listas/lSimple.js'
 const lsUsuario=new listaSimple();
@@ -16,19 +26,29 @@ const lsUsuario=new listaSimple();
     //FORMULARIO-LOGIN
 const iUserL = document.getElementById('i_userL')
 const iPassL = document.getElementById('i_passL')
-const buttonLogin = document.getElementById('b_login')
 const iCheckL = document.getElementById('l_checkbox')
-let addAdmin=true;
+const buttonLogin = document.getElementById('b_login')
 buttonLogin.addEventListener('click',(e)=>{
     e.preventDefault()
-    //console.log(iCheckL.checked);
-    if(addAdmin==true){//CREAR DEFAULT USER
+    if(addAdmin==true){//crear default user
         lsUsuario.insertarP(usuario);
         addAdmin=false
     }
-    if (lsUsuario.buscar(iUserL, iPassL)){//COINCIDENCIA
-        if("A"=="A") true//SI ES ADMIN
-    }else{
+    if (lsUsuario.buscar(iUserL.value, hash(iPassL.value), iCheckL.checked)){//COINCIDENCIA
+        if (iCheckL.checked){//si es admin pagina master
+            //ocultar,mostrar
+            ocultoPageLogin.style.display = "none";
+            ocultoPageMaster.style.display = "block";
+        }else{
+            
+        } 
+    } else {//contram,user,admin esta mal
+        //agregar html
+        document.getElementById('span_menu').insertAdjacentHTML('beforeend', '<p id="ispan_menu"> la contraseña o usuario esta mal, o talvez no es administrador <p>')
+        console.log("inicio")
+        funcAsync(3000);//3s
+        document.getElementById('ispan_menu').remove()
+        console.log("final")
     }
     /*const data={
         user:userName.value,
@@ -36,14 +56,15 @@ buttonLogin.addEventListener('click',(e)=>{
         
     }*/
 })
-    //INGRESAR-REGISTRO
+    //IDEX-REGISTRO
 const buttonIndexRegistro = document.getElementById('b_registroL')//OCULTAR,MOSTRAR{LOGIN,REGISTRO}
-const ocultoPLogin = document.getElementById('d-login');
+const ocultoPageLogin = document.getElementById('d-login');
 buttonIndexRegistro.addEventListener('click',(e)=>{
     e.preventDefault()
     //debugger;
-    ocultoPLogin.style.display = "none";
-    ocultoPRegistro.style.display="block";
+    //ocultar,mostrar
+    ocultoPageLogin.style.display = "none";
+    ocultoPageRegistro.style.display="block";
 
     if (addAdmin == true) {//CREAR DEFAULT USER
         lsUsuario.insertarP(usuario);
@@ -58,7 +79,6 @@ const iPhoneR = document.getElementById('i_telR');
 const iPassR = document.getElementById('i_passR');
 const buttonRegistrarse = document.getElementById('b_registroR')
 
-
 buttonRegistrarse.addEventListener('click', (e) => {
     e.preventDefault()
     //usuarioC(dpi, name, username, password, phone, admin)
@@ -66,6 +86,38 @@ buttonRegistrarse.addEventListener('click', (e) => {
     //debugger;
     lsUsuario.insertarU(regUsuario);
 })
+
+    //MASTER
+        //USUARIOS
+const btnMFUser = document.getElementById('bfM_user')
+            //LEER INPUT
+let input = document.createElement('input');
+input.type = 'file';
+//let files = Array.from(input.files);
+
+btnMFUser.addEventListener('click', (e) => {
+    input.click();
+    input.remove();
+})
+input.addEventListener('change',function(){//cambia (e)=> a funciont()
+    //only input
+    /*const fileList = e.target.files;
+    console.log(fileList,"->",typeof(fileList));*/
+    var fr = new FileReader();
+    fr.onload = function () {
+        /*document.getElementById('output').textContent = */
+        console.log("txt->",fr.result,"->",typeof(fr.result));
+        return fr.result
+    }
+    //se se necesita fr.read...
+    fr.readAsText(this.files[0])
+    console.log(fr.onload);
+})
+        //ARTISTAS
+        //CANCIONES
+        //PODCAST
+        //MUSICAP
+
 /*
     let x = document.getElementById("hide");
     //debugger;
