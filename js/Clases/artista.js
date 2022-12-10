@@ -1,4 +1,4 @@
-class artista {
+export class Artista {
     constructor(name, age, country) {
         this.name = name
         this.age = age
@@ -11,6 +11,11 @@ class artista {
             country: this.country
         }
     }
+    SetAll(name, age, country) {
+        this.name = name
+        this.age = age
+        this.country = country
+
+    }
 
 }
-module.exports = artista;

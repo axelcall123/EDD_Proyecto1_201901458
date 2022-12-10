@@ -13,6 +13,22 @@
 	"username":"user2",
 	"password":"a2",
 	"phone":10000002,
-	"admin":false
+	"admin":true
+},
+{
+	"dpi": 3000000000003,
+	"name": "name3",
+	"username": "user3",
+	"password": "a3",
+	"phone": 10000003,
+	"admin": false
+},
+{
+	"dpi": 3000000000004,
+	"name": "name4",
+	"username": "user4",
+	"password": "a4",
+	"phone": 10000004,
+	"admin": false
 }
 ]

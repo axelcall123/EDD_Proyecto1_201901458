@@ -7,7 +7,7 @@ class listaL{
         this.inicio=null;
         this.final=null;
     }
-    insertarUMain(info){
+    insertarUMain(info){//[primero]<->[]<->[ultimo]
         const nuevo = new NodoLL(info);
         if(this.primero==null){
             this.primero=nuevo;
@@ -18,7 +18,7 @@ class listaL{
             this.nuevo=this.ultimo;
         }
     }
-    insertarUSub(buscar,info){
+    insertarFSub(buscar, info) {//[inicio]<->[]<->[final]
         let aux=this.primero;
         if(this.primero!=null){
             while(aux.info!=buscar && aux.siguiente!=null){//BUSCO NODO
@@ -30,15 +30,13 @@ class listaL{
                     this.inicio = nuevo;
                     this.final = nuevo;
                     this.primero.zp=nuevo;
-                    nuevo.zn=aux;
+                    //nuevo.zn=aux;
                 } else {
                     this.final.zp=nuevo;
                     nuevo.zn=this.final;
                     this.final=nuevo;
                 }
-            }else{//CREA EL NODO
-
-            }
+            }//else{CREA EL NODO} por que ya fueron crados los nodos
         }
     }
 

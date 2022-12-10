@@ -1,4 +1,4 @@
-class cancion {
+export class Cancion {
     constructor(artist, name, duration,gender) {
         this.artist = artist
         this.name = name
@@ -15,4 +15,3 @@ class cancion {
     }
 
 }
-module.exports = cancion;

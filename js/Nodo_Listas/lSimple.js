@@ -42,8 +42,9 @@ export class listaSimple {
             return false
         } else if (pass == aux.info.GetDatos()["password"] && ad == aux.info.GetDatos()["admin"]){//USUARIO Y CONTRA
             return true
-        }else{//CONTRASEÑA MAL | ES NO ES ADMIN
+        }//CONTRASEÑA MAL | ES NO ES ADMIN
             return false
-        }
     }
+
+    
 }

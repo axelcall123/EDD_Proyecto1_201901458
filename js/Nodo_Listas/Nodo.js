@@ -20,7 +20,7 @@ export class NodoLL extends Nodo {
     constructor(info) {
         super(info);
         this.anterior = null;
-        this.zp = null;
-        this.zn = null;
+        this.zp = null;//z+
+        this.zn = null;//z-
     }
 }

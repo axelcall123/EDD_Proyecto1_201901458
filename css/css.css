@@ -1,5 +1,5 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css");
-
+/*menu.html*/
 .center-text{
     text-align: center;
 }
@@ -20,17 +20,18 @@
     border-color: blueviolet;
     border: 10px;
 }
-button.lrRC{
+button.out{
     border: 0px;
     background-color: transparent;
     transition: background-color 2s ease-out 100ms;
     border-radius: 12px;
 }
-button.lrRC:hover{
+button.out:hover{
     
     background:rgba(90, 9, 121, 0.9375);
     color:white;
 }
+/*master.html*/
 button.d-graphic{
     width: 100%;
     height: 70%;
@@ -57,4 +58,90 @@ i.i-graphic{
 }
 #i-files{
     font-size: 45px;
+}
+/*menu.html*/
+#nav{
+    background: rgb(115, 0, 185);
+        background: linear-gradient(90deg,rgba(191, 110, 241, 1) 0%,rgba(115, 0, 185, 1) 38%,rgba(138, 39, 198, 1) 99%);
+}
+.navBtn{
+    color: white;
+    margin:0px 0px 10px 0px;
+}
+.anav{
+color: white;
+}
+.anav:hover {
+    color: white;
+}
+.navBtn:hover{
+    border-bottom:2px solid black;
+}
+/*artista.html*/
+div.d-cancion{
+    border: 1px solid black;
+    height: 200px;
+    aspect-ratio: 20/23;
+    border-radius: 10px;
+    background: rgb(115, 0, 185);
+        background: linear-gradient(90deg, rgba(191, 110, 241, 1) 0%, rgba(115, 0, 185, 1) 50%, rgba(138, 39, 198, 1) 100%);
+}
+div.d-4-cancion {
+    margin-bottom: 57px;
+    float: left;
+}
+i.i-headset{
+    font-size: 70px;
+    margin: 0px 0px 0px 49px;
+    position: relative;
+    top:-44px;
+}
+h4.music{
+    position: relative;
+    top:-16px;
+    color: white;
+}
+i.retroceso{
+    position: relative;
+    margin-left: -124px;
+}
+i.adelantar{
+    position: relative;
+    top: -33px;
+        right: -159px;
+}
+h6.duracion{
+    position: relative;
+    margin-top: -37px;
+    text-align: center;
+    color: white;
+}
+div.contMusic{
+    margin-bottom: 66px;
+}
+button.b-a-persona{
+    width: 100px;
+    aspect-ratio: 1/1;
+    border-radius: 100%;
+    background-color: rgb(115, 0, 185);
+}
+i.i-a-persona{
+    color: white;
+    font-size: 90px;
+    position: relative;
+    top: -36px;
+}
+i.addP{
+    font-size: 20px;
+    position: relative;
+    top: -4px;
+    left: -3px;
+}
+button.b-az{
+    background-color: rgb(115, 0, 185);
+    color:white;
+}
+.d-artista-persona{
+    width: 100px;
+    float: left;
 }

@@ -1,0 +1,26 @@
+[
+    {
+        "artist":"A2",
+        "name":"C1",
+        "duration":2,
+        "gender":["G1","G2"]
+    },
+    {
+        "artist": "A2",
+        "name": "C2",
+        "duration": 2,
+        "gender": [
+            "G1",
+            "G2"
+        ]
+    },
+    {
+        "artist": "A1",
+        "name": "C3",
+        "duration": 2,
+        "gender": [
+            "G5",
+            "G6"
+        ]
+    }
+]

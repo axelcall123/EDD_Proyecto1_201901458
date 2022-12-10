@@ -1,11 +1,12 @@
 export class Usuario {
-    constructor(dpi,name,username,password,phone,admin) {
+    constructor(dpi,name,username,password,phone,admin,playlist) {
         this.dpi = dpi
         this.name = name
         this.username = username
         this.password = password
         this.phone = phone
         this.admin = admin
+        this.playlist=playlist
     }
     GetDatos() {
         return {
@@ -17,23 +18,8 @@ export class Usuario {
             admin: this.admin
         }
     }
-    SetDpi(dpi) {
-        this.dpi = dpi
-    }
-    SetName(name) {
-        this.name = name
-    }
-    SetUserN(username) {
-        this.username = username
-    }
-    SetPass(password) {
-        this.password = password
-    }
-    SetPhone(phone) {
-        this.phone = phone
-    }
-    SetAdmin(admin) {
-        this.admin = admin
+    GetPlayList(){
+        return this.playlist
     }
     SetAll(dpi, name, username, password, phone, admin){
         this.dpi = dpi
@@ -42,6 +28,9 @@ export class Usuario {
         this.password = password
         this.phone = phone
         this.admin = admin
+    }
+    SetPlayList(playlist){
+        this.playlist = playlist
     }
 
 }
