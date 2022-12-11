@@ -38,28 +38,28 @@ listaS.insertarU(20);
 listaS.insertarU(30);*/
 
 //LISTA DOBLE CIRCULA
-const lde = require("./listaDobleEnlazada");
+/*const lde = require("./listaDobleEnlazada");
 const circular = new lde();
 circular.insertar("a");
 circular.insertar("b");
 circular.insertar("c");
 circular.insertar("d");
-circular.insertar("e");
+circular.insertar("e");*/
 
 //LISTA LISTA
-/*const ll = require("./listaLista");
-const listalista = new ll();
-listalista.insertarUMain("A1")
-listalista.insertarUMain("A2")
-listalista.insertarUMain("A3")
-listalista.insertarUMain("A4")
-listalista.insertarUMain("A5")
-listalista.insertarUMain("A6")
+import { listaLista } from"./listaLista";
 
-listalista.insertarFSub("A5","1A5")
-listalista.insertarFSub("A5", "2A5")
-listalista.insertarFSub("A5", "3A5")
+listaLista.insertarUMain("A1");
+listaLista.insertarUMain("A2");
+listaLista.insertarUMain("A3");
+listaLista.insertarUMain("A4");
+listaLista.insertarUMain("A5");
+listaLista.insertarUMain("A6");
 
-listalista.insertarFSub("A3", "1A3")
-listalista.insertarFSub("A3", "2A3")
-listalista.insertarFSub("A3", "3A3")*/
+listaLista.insertarPSub("A5","1A5");
+listaLista.insertarPSub("A5", "2A5");
+listaLista.insertarPSub("A5", "3A5");
+
+listaLista.insertarPSub("A3", "1A3");
+listaLista.insertarPSub("A3", "2A3");
+listaLista.insertarPSub("A3", "3A3");
