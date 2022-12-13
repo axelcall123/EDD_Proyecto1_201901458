@@ -8,4 +8,13 @@ btn.addEventListener('click', (e) => {
     })
     //console.log(`${cont}+hola`,typeof(add))
     cont++;
+
+    let codigodot ="digraph {a -> b->c->d->e}"
+
+    d3.select("#lienzo")
+    .graphviz()
+    .width(900)
+    .height(500)
+    .renderDot(codigodot)
+    console.log("hola")
 })

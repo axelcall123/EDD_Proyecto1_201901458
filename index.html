@@ -84,11 +84,11 @@
                 <!--MENU-->
                 <form action="" class="menu-main">
                     <h1 class="center-text">REGISTRO</h1>
-
+    
                     <div class="row">
                         <i class="bi bi-person-plus-fill menu-persona"></i>
                     </div>
-
+    
                     <div class="input-group mb-2 mr-sm-2">
                         <!--USUARIO-->
                         <div class="input-group-prepend">
@@ -96,7 +96,7 @@
                         </div>
                         <input id="i_userR" type="text" class="form-control" placeholder="Usuario" required>
                     </div>
-
+    
                     <div class="input-group mb-2 mr-sm-2">
                         <!--NOMBRE COMPLETO-->
                         <div class="input-group-prepend">
@@ -104,7 +104,7 @@
                         </div>
                         <input id="i_nombreR" type="text" class="form-control" placeholder="Nombre completo" required>
                     </div>
-
+    
                     <div class="input-group mb-2 mr-sm-2">
                         <!--DPI-->
                         <div class="input-group-prepend">
@@ -112,15 +112,16 @@
                         </div>
                         <input id="i_dpiR" type="number" class="form-control" placeholder="DPI" required>
                     </div>
-
+    
                     <div class="input-group mb-2 mr-sm-2">
                         <!--TELEFONO-->
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="bi bi-phone-fill"></i></div>
                         </div>
-                        <input id="i_telR" type="number" class="form-control" placeholder="Telefono" max="8" min="8" required>
+                        <input id="i_telR" type="number" class="form-control" placeholder="Telefono" max="10000000"
+                            min="9999999" required>
                     </div>
-
+    
                     <div class="input-group mb-2 mr-sm-2">
                         <!--PASSWORD-->
                         <div class="input-group-prepend">
@@ -128,7 +129,7 @@
                         </div>
                         <input id="i_passR" type="password" class="form-control" placeholder="Contraseña" required>
                     </div>
-
+    
                     <hr>
                     <div class="row">
                         <button id="b_registroR" type="submit" class="btn btn-sm menu-boton">REGISTRO</button>
@@ -200,6 +201,57 @@
                 <img src="descarga.png" alt="" class="rounded mx-auto d-block">
             </div>
         </div>
+    </div>
+
+    <!--NAV-->
+    <nav id="nav" class="navbar navbar-light bg-light">
+        <a class="navbar-brand anav">MAIN PAGE</a>
+        <form class="form-inline">
+            <button class="btn navBtn" id="index-musica">Musica</button>
+            <button class="btn navBtn" id="index-play">PlayList</button>
+            <button class="btn navBtn" id="index-Art">Artistas</button>
+            <button class="btn navBtn" id="index-Ami">Amigos</button>
+            <button class="btn navBtn" id="index-Blo">Bloqueados</button>
+        </form>
+    </nav>
+    <!--PAGINA PRINCIPAL-->
+    <div class="container" id="d-main-page">
+        <!--DANGER(others)-->
+        <!--ARTISTA-->
+        <!--DANGER(PERSONA,CANCION)-->
+        <div class="row" id="d-main-artista">
+            <div class="col-md-12">
+                <div class="row">
+                    <!--AZ-->
+                    <div class="col-sm-1">
+                        <button class="b-az" id="b-z-a">
+                            A
+                            <i class="bi bi-caret-up-fill"></i>
+                            z
+                        </button>
+                    </div>
+                    <div class="col-sm-1">
+                        <button class="b-az" id="b-a-z">
+                            A
+                            <i class="bi bi-caret-down-fill"></i>
+                            Z
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2" id="d-artista-artista">
+                <!--PERSONA-->
+                
+            </div>
+            <div class="col-md-10">
+                <div class="row" id="d-artista-cancion">
+                    <!--CANCION-->
+                    
+                </div>
+            </div>
+        </div>
+
+        
     </div>
 
     <!--SCRIPTS-->

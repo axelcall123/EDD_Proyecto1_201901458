@@ -9,6 +9,12 @@ ocultoPageMaster.style.display = 'none';
     //CARGA MASIVA CANCIONES OCULTO
 const btnMFSong = document.getElementById('bfM_song');
 btnMFSong.style.display = 'none';
+    //NAV
+const ocultoNav = document.getElementById('nav');
+ocultoNav.style.display = 'none';
+    //PAGINA PRINCIPAL
+const ocultoPageMain = document.getElementById('d-main-page');
+ocultoPageMain.style.display = 'none';
 //FUNCIONES
 import { hash } from './func/func.js'
 import {funcAsync } from './func/func.js'
@@ -46,23 +52,25 @@ btnLogin.addEventListener('click',(e)=>{
             //ocultar,mostrar
             ocultoPageLogin.style.display = "none";
             ocultoPageMaster.style.display = "block";
-        }else{
-
+        }else{//no admin main page
+            ocultoPageLogin.style.display = "none";
+            ocultoNav.style.display = 'block';
         }
     } else {//contram,user,admin esta mal
         //agregar html
         document.getElementById('span_menu').insertAdjacentHTML('beforeend', '<p id="ispan_menu"> la contraseña o usuario esta mal, o talvez no es administrador <p>')
-        console.log("inicio")
-        funcAsync(3000);//3s
+        //console.log("inicio")
+        //funcAsync(3000);//3s
         document.getElementById('ispan_menu').remove()
-        console.log("final")
+        //console.log("final")
     }
     // const data={
     //     user:userName.value,
     //     paass:passWord.value
     // }
 })
-    //INDEX-REGISTRO
+    //REGISTRARSE
+        //INDEX-REGISTRO
 const btnIndexRegistro = document.getElementById('b_registroL')//OCULTAR,MOSTRAR{LOGIN,REGISTRO}
 const ocultoPageLogin = document.getElementById('d-login');
 btnIndexRegistro.addEventListener('click',(e)=>{
@@ -74,7 +82,7 @@ btnIndexRegistro.addEventListener('click',(e)=>{
         addAdmin = false
     }
 }) 
-    //REGISTRARSE
+        //REG
 const iUserR = document.getElementById('i_userR');
 const iNameR = document.getElementById('i_nombreR');
 const iDpiR = document.getElementById('i_dpiR');
@@ -87,6 +95,14 @@ btnRegistrarse.addEventListener('click', (e) => {
     //dpi, name, username, password, phone, admin
     let regUsuario = new Usuario(parseInt(iDpiR.value), iNameR.value, iUserR.value, hash(iPassR.value), parseInt(iPhoneR.value),false);
     lsUsuario.insertarU(regUsuario);
+    ocultoPageRegistro.style.display = 'none';
+    ocultoPageLogin.style.display = "block";
+})
+    //SALIR
+const btnROut = document.getElementById("b_cancelarR")
+btnROut.addEventListener('click', (e) => {
+    ocultoPageRegistro.style.display = 'none';
+    ocultoPageLogin.style.display = "block";
 })
     //MASTER CARGAR ARCHIVOS
         //USUARIOS
@@ -165,5 +181,25 @@ inpMSong.addEventListener('change', function () {//cambia (e)=> a funciont()
 }) 
         //PODCAST
         //MUSICAP
-
+    //MASTER GRAPHIZ
+        //USUARIOS
+const bgM_user = document.getElementById("bgM_user")
+bgM_user.addEventListener('click', (e) => {
+    //lsUsuario
+})
+        //ARTISTAS
+        //MUSICA
+        //PODCAST
+    //MASTER SALIR
+const btnMOut = document.getElementById('b-m-out');
+btnMOut.addEventListener('click', (e) => {
+    ocultoPageMaster.style.display = 'none';
+    ocultoPageLogin.style.display = "block";
+})
+    //MAIN PAGE
+        //ARTISTA
+        
+            //AZ
+            //ARTISTA MOSTRAR
+            //AGREGAR
 //alert (document.getElementsByClassName('.col1').style.backgroundColor);
