@@ -1,5 +1,4 @@
 import { Nodo } from './Nodo.js'
-import {graphviz} from '../../d3-graphviz/index.js'
 export class listaSimple {
     constructor() {
         this.primero = null;
@@ -19,7 +18,6 @@ export class listaSimple {
         }
         this.tamano++;
     }
-
     insertarU(info) {
         const nuevo = new Nodo(info);
         if (this.primero == null) {
@@ -40,11 +38,11 @@ export class listaSimple {
             aux=aux.siguiente;
         }
         if(aux==null){//LLEGO FINAL
-            return false
+            return {TF:false,nodo:null}
         } else if (pass == aux.info.GetDatos()["password"] && ad == aux.info.GetDatos()["admin"]){//USUARIO Y CONTRA
-            return true
+            return {TF:true,nodo:aux}
         }//CONTRASEÑA MAL | ES NO ES ADMIN
-            return false
+            return {TF:false,nodo:aux}
     }
     //SOLO PARA USUARIO
     graphviz(){
@@ -75,21 +73,51 @@ export class listaSimple {
         }`
         return codigodot
     }
-    add(info){
-        this.insertarU(info)
+    //SOLO PARA EL DPI
+    buscarDPI(dpi){
+        aux=this.primero
+        while(aux!=null && aux.info.GetDatos()["DPI"]!=dpi){
+            aux=aux.siguiente
+        }
+        return aux
     }
-    push(info){
+    getHTML(){
+        let elementoL = new listaSimple()
+        let idL =new listaSimple()
+        let aux=this.primero
+        while(aux!=null){
+            var user = aux.info.GetDatos()["username"]
+            var dpi = aux.info.GetDatos()["dpi"]
+            var elementoT=`
+            <div class="d-artista-persona" id="d-Mamigo-user-${dpi}">
+                <h5 class="center-text">${user}</h5>
+                <button class="b-a-persona" id="b-Mamigo-user-${dpi}">
+                    <i class="bi bi-person-circle i-a-persona"></i>
+                </button>
+            </div>`
+            var idT = `b-Mamigo-user-${dpi}`
+            elementoL.insertarP(elementoT)
+            idL.insertarP(idT)
+            aux=aux.siguiente
+        }
+        return {elemento:elementoL,id:idL}
+    }
+
+    push(info) {
         this.insertarP(info)
     }
-    pop(){           
-        if (this.primero!=null){
-            var temp=this.primero
-            this.primero=temp.siguiente
+    pop() {
+        if (this.primero != null) {
+            var temp = this.primero
+            this.primero = temp.siguiente
             this.tamano--
-            return  temp.info
-        }else{
+            return temp.info
+        } else {
             return null
-        }   
+        }
+    }
+    add(info){
+        this.insertarU(info)
     }
     remove(){
         
@@ -106,7 +134,6 @@ export class listaSimple {
             return null
         }
     }
-
     vacio(){
         if(this.primero==null) return true
         return false

@@ -1,4 +1,6 @@
 /*NOTAS: e=event*/
+//
+let logUser=null
 //DIV OCULTO DEFAULT
     //REGISTRO
 const ocultoPageRegistro = document.getElementById('d-register');
@@ -7,7 +9,7 @@ ocultoPageRegistro.style.display = 'none';
 const ocultoPageMaster = document.getElementById('d-master');
 ocultoPageMaster.style.display = 'none';
     //CARGA MASIVA CANCIONES OCULTO
-const btnMFSong = document.getElementById('bfM_song');
+const btnMFSong = document.getElementById('b-f-Msong');
 btnMFSong.style.display = 'none';
     //NAV
 const ocultoNav = document.getElementById('nav');
@@ -15,6 +17,22 @@ ocultoNav.style.display = 'none';
     //PAGINA PRINCIPAL
 const ocultoPageMain = document.getElementById('d-main-page');
 ocultoPageMain.style.display = 'none';
+    //OCULTO MAIN
+        //MUSICA
+/*const ocultoPMusica = document.getElementById('')
+ocultoPMusica.style.display = 'none';
+        //PLAY-LIST
+const ocultoPPL = document.getElementById('')
+ocultoPPL.style.display = 'none';*/
+        //ARTISTA
+const ocultoPArtista = document.getElementById('d-m-artista')
+ocultoPArtista.style.display = 'none';
+        //AMIGOS
+const ocultoPAmigo = document.getElementById('d-m-amigos')
+ocultoPAmigo.style.display = 'none';
+        //BLOQUEADOS
+const ocultoPBloqueado = document.getElementById('d-m-bloqueados')
+ocultoPBloqueado.style.display = 'none';
 //FUNCIONES
 import { hash } from './func/func.js'
 import {funcAsync } from './func/func.js'
@@ -47,7 +65,9 @@ btnLogin.addEventListener('click',(e)=>{
         lsUsuario.insertarP(usuario);
         addAdmin=false
     }
-    if (lsUsuario.buscar(iUserL.value, hash(iPassL.value), iCheckL.checked)){//COINCIDENCIA
+    let log = lsUsuario.buscar(iUserL.value, hash(iPassL.value), iCheckL.checked)
+    logUser=log["nodo"]
+    if (log["TF"]){//COINCIDENCIA
         if (iCheckL.checked){//si es admin pagina master
             //ocultar,mostrar
             ocultoPageLogin.style.display = "none";
@@ -55,6 +75,7 @@ btnLogin.addEventListener('click',(e)=>{
         }else{//no admin main page
             ocultoPageLogin.style.display = "none";
             ocultoNav.style.display = 'block';
+            ocultoPageMain.style.display = 'block';
         }
     } else {//contram,user,admin esta mal
         //agregar html
@@ -106,7 +127,7 @@ btnROut.addEventListener('click', (e) => {
 })
     //MASTER CARGAR ARCHIVOS
         //USUARIOS
-const btnMFUser = document.getElementById('bfM_user')
+const btnMFUser = document.getElementById('b-f-Muser')
 let inpMFUser = document.createElement('input'); inpMFUser.type = 'file';
 btnMFUser.addEventListener('click', (e) => {
     inpMFUser.click();
@@ -132,7 +153,7 @@ inpMFUser.addEventListener('change',function(){//cambia (e)=> a funciont()
     fr.readAsText(this.files[0])
 })
        //ARTISTAS 
-const btnMFArtist = document.getElementById('bfM_artis')
+const btnMFArtist = document.getElementById('b-f-Martis')
 let inpMArtist = document.createElement('input'); inpMArtist.type = 'file';
 btnMFArtist.addEventListener('click', (e) => {
     inpMArtist.click();
@@ -183,9 +204,9 @@ inpMSong.addEventListener('change', function () {//cambia (e)=> a funciont()
         //MUSICAP
     //MASTER GRAPHIZ
         //USUARIOS
-const bgM_user = document.getElementById("bgM_user")
+const bgM_user = document.getElementById("b-g-M-user")
 bgM_user.addEventListener('click', (e) => {
-    //lsUsuario
+
 })
         //ARTISTAS
         //MUSICA
@@ -197,9 +218,66 @@ btnMOut.addEventListener('click', (e) => {
     ocultoPageLogin.style.display = "block";
 })
     //MAIN PAGE
+        //MUSICA
+        //PLAYLIST
         //ARTISTA
-        
+const btnPArtista = document.getElementById('b-index-Art')
+btnPArtista.addEventListener('click', (e) => {
+
+})
             //AZ
             //ARTISTA MOSTRAR
             //AGREGAR
+        //AMIGOS
+            //AGREGAR
+const btnPAmigo = document.getElementById('b-index-Ami')
+btnPAmigo.addEventListener('click', (e) => {
+    /*//MUSICA
+    ocultoPMusica.style.display = 'none';
+    //PLAY-LIST
+    ocultoPPL.style.display = 'none';*/
+    //ARTISTA
+    ocultoPArtista.style.display = 'none';
+    //AMIGOS
+    ocultoPAmigo.style.display = 'block';
+    //BLOQUEADOS
+    ocultoPBloqueado.style.display = 'none';
+    let listaAux = lsUsuario.getHTML()
+    const padre = document.getElementById("d-Mamigo-user")//elimina todo los hijos por si las moscas
+    while (padre.firstChild) {
+        padre.firstChild.remove()
+    }
+    document.getElementById("d-Mamigo-user").insertAdjacentHTML('beforeend', "<h5>Usuarios</h5>")
+    while (listaAux["elemento"].vacio() != true && listaAux["id"].vacio() != true){
+        //despliego <elementos usuarios>
+        document.getElementById("d-Mamigo-user").insertAdjacentHTML('beforeend', listaAux["elemento"].pop())
+        //depliego user por id
+        let idT = listaAux["id"].pop()
+        let btnTemp = document.getElementById(idT)
+        //para que no imprima mi usuario
+        if (idT.replace("b-Mamigo-user-", "") != logUser.info.GetDatos()["dpi"].toString()) {
+           //funciones de los botones
+            btnTemp.addEventListener('click', (e) => {
+                let txtId = e.target.id.replace("b-Mamigo-user-","")//obtengo el id:dpi
+                let nodoUsuarioTemp = lsUsuario.buscarDPI(txtId)//busco id
+                logUser.getPila().push(nodoUsuarioTemp)//agrego pila
+                var user = nodoUsuarioTemp.info.GetDatos()["username"]
+                var dpi = nodoUsuarioTemp.info.GetDatos()["dpi"]
+                let btnHtml =`
+                <div class="d-artista-persona" id="d-Mamigo-amigo-${dpi}">
+                    <h5 class="center-text">${user}</h5>
+                    <button class="b-a-persona" disabled>
+                        <i class="bi bi-person-circle i-a-persona"></i>
+                    </button>
+                </div>`
+                //desplieo <elemento amigos>
+                document.getElementById("d-Mamigo-user").insertAdjacentHTML('beforeend', listaAux["elemento"].pop())
+            })
+        }else{//elimino mi user de las opciones todo el div
+            document.getElementById(idT.replace("b-Mamigo-user-", "d-Mamigo-user-")).remove()
+        }
+    }
+})
+            //ELMINAR
+        //BLOQUEADOS
 //alert (document.getElementsByClassName('.col1').style.backgroundColor);

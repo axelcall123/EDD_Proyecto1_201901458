@@ -104,26 +104,26 @@ export class matrizDispersa{
         //creo nuevo(x|y)->inserto(x|y)
         //{nodo,simbolo}
         //#1 no e dia,no e mes
-        if(auxX[1]!="=" && auxY[1]!="="){
-            this.insertarX(auxX[0], this.crearX(x), auxX[1], nuevo)//auxXY,nuevoXY,simbolo,nuevo
-            this.insertarY(auxY[0], this.crearY(y), auxY[1],nuevo)
+        if(auxX["posicion"]!="=" && auxY["posicion"]!="="){
+            this.insertarX(auxX["nodo"], this.crearX(x), auxX["posicion"], nuevo)//auxXY,nuevoXY,simbolo,nuevo
+            this.insertarY(auxY["nodo"], this.crearY(y), auxY["posicion"],nuevo)
         }
         //#2e dia, no e mes
-        else if (auxX[1]=="=" && auxY[1] != "="){
-            this.insertarY(auxY[0], this.crearY(y), auxY[1], nuevo)//auxXY,nuevoXY,simbolo,nuevo
-            auxY=this.buscarY(y,nodoX[0])//xy,aux
-            this.insertarY(auxY[0],nuevo,auxY[1],null);//null para evitar errores
+        else if (auxX["posicion"]=="=" && auxY["posicion"] != "="){
+            this.insertarY(auxY["nodo"], this.crearY(y), auxY["posicion"], nuevo)//auxXY,nuevoXY,simbolo,nuevo
+            auxY = this.buscarY(y, auxX["nodo"])//xy,aux change nodoX
+            this.insertarY(auxY["nodo"],nuevo,auxY[1],null);//null para evitar errores
         }
         //#3no e dia,e mes
-        else if (auxX[1] != "=" && auxY[1] == "="){
-            this.insertarX(auxX[0], this.crearX(x), auxX[1], nuevo)//auxXY,nuevoXY,simbolo,nuevo
+        else if (auxX["posicion"] != "=" && auxY["posicion"] == "="){
+            this.insertarX(auxX["nodo"], this.crearX(x), auxX["posicion"], nuevo)//auxXY,nuevoXY,simbolo,nuevo
             auxX = this.buscarX(x, nodoY[0])//xy,aux
-            this.insertarX(auxX[0], nuevo, auxX[1], null);//null para evitar errores
+            this.insertarX(auxX["nodo"], nuevo, auxX[1], null);//null para evitar errores
         }
         //#4 e dia, e mes
-        else if (auxX[1] == "=" && auxY[1] == "=") {
-            auxY = this.buscarY(y, nodoX[0])//xy,aux
-            auxY[0]=info
+        else if (auxX["posicion"] == "=" && auxY["posicion"] == "=") {
+            auxY = this.buscarY(y, auxX["nodo"])//xy,aux change nodoX
+            auxY["nodo"]=info
         }
     }
 }
