@@ -20,10 +20,10 @@ ocultoPageMain.style.display = 'none';
     //OCULTO MAIN
         //MUSICA
 /*const ocultoPMusica = document.getElementById('')
-ocultoPMusica.style.display = 'none';
+ocultoPMusica.style.display = 'none';*/
         //PLAY-LIST
-const ocultoPPL = document.getElementById('')
-ocultoPPL.style.display = 'none';*/
+const ocultoPPL = document.getElementById('d-m-playlist')
+ocultoPPL.style.display = 'none';
         //ARTISTA
 const ocultoPArtista = document.getElementById('d-m-artista')
 ocultoPArtista.style.display = 'none';
@@ -220,15 +220,27 @@ btnMOut.addEventListener('click', (e) => {
     //MAIN PAGE
         //MUSICA
         //PLAYLIST
-
+const btnPPlayL = document.getElementById('b-index-play')
+btnPPlayL.addEventListener('click', (e) => {
+    /*//MUSICA
+    ocultoPMusica.style.display = 'none';*/
+    //PLAY-LIST
+    ocultoPPL.style.display = 'block';
+    //ARTISTA
+    ocultoPArtista.style.display = 'none';
+    //AMIGOS
+    ocultoPAmigo.style.display = 'none';
+    //BLOQUEADOS
+    ocultoPBloqueado.style.display = 'none';
+    //FIXME:si ya hay
+})
         //ARTISTA
-
 const btnPArtista = document.getElementById('b-index-Art')
 btnPArtista.addEventListener('click', (e) => {
     /*//MUSICA
-    ocultoPMusica.style.display = 'none';
+    ocultoPMusica.style.display = 'none';*/
     //PLAY-LIST
-    ocultoPPL.style.display = 'none';*/
+    ocultoPPL.style.display = 'none';
     //ARTISTA
     ocultoPArtista.style.display = 'block';
     //AMIGOS
@@ -292,24 +304,39 @@ btnPArtista.addEventListener('click', (e) => {
             btnTempM.addEventListener('click', (e) => {
                 e.target.setAttribute("disabled", "disabled");//para no ser click
                 var temp = e.target.id.replace("b-MArt-mus-", "")
-                let ids = text.split("-");//obtengo el id1(artista)-id2(musica)
-                let nodoUsuarioTemp =llArtista.buscarIDS(ids[0].parseInt(), ids[1].parseInt())
+                let ids = temp.split("-");//obtengo el id1(artista)-id2(musica)
+                let nodoUsuarioTemp = llArtista.buscarIDS(parseInt(ids[0],10), parseInt(ids[1],10))
                 logUser.info.GetPlayList().insertar(nodoUsuarioTemp)//agrego play list
+                
+                var nombre = nodoUsuarioTemp.info.GetDatos()["name"]
+                var duracion = nodoUsuarioTemp.info.GetDatos()["duration"]
+                let btnHtml = `
+                    <div class="d-4-cancion">
+                    <div class="d-cancion">
+                        <button class="btn" disabled><i class="bi bi-file-play-fill"></i></button>
+                        <h4 class="center-text music">PLAYLIST</h4>
+                        <i class="bi bi-headset i-headset"></i>
+                        <i class="bi bi-caret-left-fill retroceso"></i>
+                        <h6 class="duracion">${duracion}</h6>
+                        <i class="bi bi-caret-right-fill adelantar"></i>
+                        <h5 class="center-text nombre-cancion">${nombre}</h5>
+                    </div>
+                </div>
+                `
+                //despliego <elemento playList>
+                document.getElementById("d-m-p-playlist").insertAdjacentHTML('beforeend', btnHtml)
             })
         }
     }
 })
-            //AZ
-            //ARTISTA MOSTRAR
-            //AGREGAR
         //AMIGOS
             //AGREGAR
 const btnPAmigo = document.getElementById('b-index-Ami')
 btnPAmigo.addEventListener('click', (e) => {
     /*//MUSICA
-    ocultoPMusica.style.display = 'none';
+    ocultoPMusica.style.display = 'none';*/
     //PLAY-LIST
-    ocultoPPL.style.display = 'none';*/
+    ocultoPPL.style.display = 'none';
     //ARTISTA
     ocultoPArtista.style.display = 'none';
     //AMIGOS

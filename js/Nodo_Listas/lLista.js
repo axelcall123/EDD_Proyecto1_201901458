@@ -179,7 +179,7 @@ export class listaLista {
             aux=aux.siguiente
         }
         aux = aux.zp
-        while (aux != id2) {
+        while (aux.id != id2) {
             aux=aux.zp
         }
         return aux
