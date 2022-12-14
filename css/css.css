@@ -123,12 +123,12 @@ div.contMusic{
 button.b-a-persona{
     width: 100px;
     height: 100px;
-    border-radius: 100%;
+    border-radius: 25%;
     background-color: rgb(115, 0, 185);
 }
 i.i-a-persona{
     color: white;
-    font-size: 90px;
+    font-size: 72px;/*90px->72px evitar error boton*/
     position: relative;
     top: -36px;
 }

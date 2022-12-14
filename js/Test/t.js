@@ -1,13 +1,25 @@
 const btn = document.getElementById('add')
-let cont=1;
+import { t } from "./ft.js";
+
 btn.addEventListener('click', (e) => {
-    document.getElementById('d-add').insertAdjacentHTML('beforeend', `<button id="btn-${cont}">${cont}</button>`)
-    let btnTemp = document.getElementById(`btn-${cont}`)
-    btnTemp.addEventListener('click',(e)=>{
-        console.log(`soy boton ${e.target.id}`);
-    })
-    //console.log(`${cont}+hola`,typeof(add))
-    cont++;
+    //let cont = 0;
+    let listaAux = t(10);
+
+    const padre = document.getElementById("d-add")//elimina todo los hijos por si las moscas
+    while (padre.firstChild) {
+        padre.firstChild.remove()
+    }
+
+    while (listaAux.vacio()!=true){
+        let cont=listaAux.pop()
+        document.getElementById('d-add').insertAdjacentHTML('beforeend', `<button id="btn-${cont}">${cont}</button>`)
+        let btnTemp = document.getElementById(`btn-${cont}`)
+        btnTemp.addEventListener('click', (e) => {
+            console.log(`soy boton ${e.target.id}`);
+        })
+        //console.log(`${cont}+hola`,typeof(add))
+        //cont++;
+    }
 
     let codigodot ="digraph {a -> b->c->d->e}"
 

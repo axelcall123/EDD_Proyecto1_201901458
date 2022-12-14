@@ -75,8 +75,8 @@ export class listaSimple {
     }
     //SOLO PARA EL DPI
     buscarDPI(dpi){
-        aux=this.primero
-        while(aux!=null && aux.info.GetDatos()["DPI"]!=dpi){
+        let aux=this.primero
+        while (aux != null && aux.info.GetDatos()["dpi"]!=dpi.toString()){
             aux=aux.siguiente
         }
         return aux
@@ -92,7 +92,7 @@ export class listaSimple {
             <div class="d-artista-persona" id="d-Mamigo-user-${dpi}">
                 <h5 class="center-text">${user}</h5>
                 <button class="b-a-persona" id="b-Mamigo-user-${dpi}">
-                    <i class="bi bi-person-circle i-a-persona"></i>
+                    <i class="bi bi-person-circle i-a-persona"> </i>
                 </button>
             </div>`
             var idT = `b-Mamigo-user-${dpi}`
@@ -111,6 +111,7 @@ export class listaSimple {
             var temp = this.primero
             this.primero = temp.siguiente
             this.tamano--
+            if (this.tamano == 0) { this.ultimo = this.primero }
             return temp.info
         } else {
             return null
@@ -127,8 +128,13 @@ export class listaSimple {
             for(var x=1;x<this.tamano;x++){
                 aux=aux.siguiente
             }
+            aux.siguiente=null
             this.ultimo=aux
             this.tamano--
+            if (this.tamano==0){
+                this.ultimo=null
+                this.primero=null
+            }
             return temp.info
         }else{
             return null
@@ -137,6 +143,9 @@ export class listaSimple {
     vacio(){
         if(this.primero==null) return true
         return false
+    }
+    tam(){
+        return this.tamano
     }
 
 }

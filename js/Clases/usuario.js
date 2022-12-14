@@ -1,4 +1,5 @@
 import { listaSimple } from "../Nodo_Listas/lSimple.js"
+import { ldEnlazada } from "../Nodo_Listas/lDEnalazada.js"
 export class Usuario {
     constructor(dpi,name,username,password,phone,admin,playlist) {
         this.dpi = dpi
@@ -8,9 +9,9 @@ export class Usuario {
         this.phone = phone
         this.admin = admin
         //cada usuario tiene su propia
-        this.playlist=playlist
-        this.pila=new listaSimple();
-        this.cola=new listaSimple();
+        this.playlist = new ldEnlazada()
+        this.pila=new listaSimple()
+        this.cola = new listaSimple()
     }
     GetDatos() {
         return {
@@ -31,7 +32,12 @@ export class Usuario {
         this.admin = admin
     }
     GetPlayList() {return this.playlist}
-    getPila(){return this.pila}
-    getCola() {return this.cola }
+    GetPila(){return this.pila}
+    GetCola() {return this.cola }
+
+    /*SetPlayList(playlist) { this.playlist = playlist }
+    SetPila(pila) { this.pila =pila }
+    SetCola(cola) { this.cola =cola }*/
+
 }
 //module.exports = usuario;

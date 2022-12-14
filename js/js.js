@@ -1,5 +1,5 @@
 /*NOTAS: e=event*/
-//
+//CLONAR
 let logUser=null
 //DIV OCULTO DEFAULT
     //REGISTRO
@@ -220,10 +220,84 @@ btnMOut.addEventListener('click', (e) => {
     //MAIN PAGE
         //MUSICA
         //PLAYLIST
+
         //ARTISTA
+
 const btnPArtista = document.getElementById('b-index-Art')
 btnPArtista.addEventListener('click', (e) => {
+    /*//MUSICA
+    ocultoPMusica.style.display = 'none';
+    //PLAY-LIST
+    ocultoPPL.style.display = 'none';*/
+    //ARTISTA
+    ocultoPArtista.style.display = 'block';
+    //AMIGOS
+    ocultoPAmigo.style.display = 'none';
+    //BLOQUEADOS
+    ocultoPBloqueado.style.display = 'none';
 
+    let listaAux = llArtista.getHTML()
+    var padre = document.getElementById("d-artista-artista")//elimina todo los hijos por si las moscas
+    while (padre.firstChild) {
+        padre.firstChild.remove()
+    }
+    padre = document.getElementById("d-artista-musica") //elimina todo los hijos por si las moscas
+    while (padre.firstChild) {
+        padre.firstChild.remove()
+    }
+
+    //while artistas div and button
+    //pila de ids
+    let idsArtistas = new listaSimple()
+    while (listaAux["id"].vacio() != true){  
+        //TEMPORALES
+        let TempID = listaAux["id"].pop()
+        let TempElemento=listaAux["elemento"].pop()
+        //depliego artista por id
+        let idTA=TempID["idp"]
+        //despliego <elementos artistas>
+        document.getElementById("d-artista-artista").insertAdjacentHTML('beforeend', TempElemento["ep"])
+        //depliego <elemntos musica varios divs>
+        document.getElementById("d-artista-musica").insertAdjacentHTML('beforeend', listaAux["eOc"].pop())
+        //invisibles toda la musica
+        document.getElementById(idTA.replace("b-MArt-art-", "d-MArt-art-")).style.display = "none";
+        let btnTempA = document.getElementById(idTA)
+        //para que no haga funcion del mismo;funciones de los botones
+        
+        
+        idsArtistas.push(idTA)//ingresar ids
+        btnTempA.addEventListener('click', (e) => {
+            let auxIds=new listaSimple()
+            while (idsArtistas.vacio()!=true){//para bloquear los demas
+                let tempIds = idsArtistas.pop()
+                if (e.target.id == tempIds){//si es mi id entonces muestralo
+                    document.getElementById(tempIds.replace("b-MArt-art-", "d-MArt-art-")).style.display = "block";
+                    
+                }else{
+                    document.getElementById(tempIds.replace("b-MArt-art-", "d-MArt-art-")).style.display = "none";
+                }
+                auxIds.push(tempIds)
+            }
+            while(auxIds.vacio()!=true){//volver a poner los ids
+                idsArtistas.push(auxIds.pop())
+            }
+        })
+        while (TempID["ids"].vacio() != true) {
+            //depliego musica por id
+            let idTM = TempID["ids"].pop()
+            //despliego <elementos musica>
+            document.getElementById(idTA.replace("b-MArt-art-","d-MArt-art-")).insertAdjacentHTML('beforeend',TempElemento["es"].pop())
+            let btnTempM = document.getElementById(idTM)
+            //para que no haga funcion del mismo;funciones de los botones
+            btnTempM.addEventListener('click', (e) => {
+                e.target.setAttribute("disabled", "disabled");//para no ser click
+                var temp = e.target.id.replace("b-MArt-mus-", "")
+                let ids = text.split("-");//obtengo el id1(artista)-id2(musica)
+                let nodoUsuarioTemp =llArtista.buscarIDS(ids[0].parseInt(), ids[1].parseInt())
+                logUser.info.GetPlayList().insertar(nodoUsuarioTemp)//agrego play list
+            })
+        }
+    }
 })
             //AZ
             //ARTISTA MOSTRAR
@@ -243,41 +317,81 @@ btnPAmigo.addEventListener('click', (e) => {
     //BLOQUEADOS
     ocultoPBloqueado.style.display = 'none';
     let listaAux = lsUsuario.getHTML()
-    const padre = document.getElementById("d-Mamigo-user")//elimina todo los hijos por si las moscas
+    var padre = document.getElementById("d-Mamigo-user")//elimina todo los hijos por si las moscas
     while (padre.firstChild) {
         padre.firstChild.remove()
     }
+    padre = document.getElementById("d-Mamigo-amigo") //elimina todo los hijos por si las moscas
+    while (padre.firstChild) {
+        padre.firstChild.remove()
+    }
+
     document.getElementById("d-Mamigo-user").insertAdjacentHTML('beforeend', "<h5>Usuarios</h5>")
-    while (listaAux["elemento"].vacio() != true && listaAux["id"].vacio() != true){
-        //despliego <elementos usuarios>
-        document.getElementById("d-Mamigo-user").insertAdjacentHTML('beforeend', listaAux["elemento"].pop())
+    document.getElementById("d-Mamigo-amigo").insertAdjacentHTML('beforeend', "<h5>Amigos</h5>")
+    /*const pilaAux=new listaSimple()
+
+    let clone=logUser.info.GetPila()
+    //let copiedPerson = Object.assign({}, person);
+    while (clone.Get().vacio()!=true){
+        var addAux=clone.Get().pop()
+        pilaAux.insertarU(addAux)
+        var user = addAux.info.GetDatos()["username"]
+        var dpi = addAux.info.GetDatos()["dpi"]
+        let btnHtml = `
+            <div class="d-artista-persona" id="d-Mamigo-amigo-${dpi}">
+                <h5 class="center-text">${user}</h5>
+                <button class="b-a-persona" disabled>
+                    <i class="bi bi-person-circle i-a-persona"></i>
+                </button>
+            </div>`
+        //desplieo <elemento amigos>
+        document.getElementById("d-Mamigo-amigo").insertAdjacentHTML('beforeend', btnHtml)
+    }
+    //FIXME:arreglar esto mijo
+    while (pilaAux.vacio()!=true){//volver a insertar
+        logUser.info.GetPila().insertarP(pilaAux.pop())
+    }*/
+
+    while (listaAux["elemento"].vacio() != true && listaAux["id"].vacio() != true){//while de usuarios
         //depliego user por id
         let idT = listaAux["id"].pop()
+        //despliego <elementos usuarios>
+        document.getElementById("d-Mamigo-user").insertAdjacentHTML('beforeend', listaAux["elemento"].pop())
         let btnTemp = document.getElementById(idT)
-        //para que no imprima mi usuario
-        if (idT.replace("b-Mamigo-user-", "") != logUser.info.GetDatos()["dpi"].toString()) {
-           //funciones de los botones
-            btnTemp.addEventListener('click', (e) => {
-                let txtId = e.target.id.replace("b-Mamigo-user-","")//obtengo el id:dpi
-                let nodoUsuarioTemp = lsUsuario.buscarDPI(txtId)//busco id
-                logUser.getPila().push(nodoUsuarioTemp)//agrego pila
-                var user = nodoUsuarioTemp.info.GetDatos()["username"]
-                var dpi = nodoUsuarioTemp.info.GetDatos()["dpi"]
-                let btnHtml =`
-                <div class="d-artista-persona" id="d-Mamigo-amigo-${dpi}">
-                    <h5 class="center-text">${user}</h5>
-                    <button class="b-a-persona" disabled>
-                        <i class="bi bi-person-circle i-a-persona"></i>
-                    </button>
-                </div>`
-                //desplieo <elemento amigos>
-                document.getElementById("d-Mamigo-user").insertAdjacentHTML('beforeend', listaAux["elemento"].pop())
-            })
-        }else{//elimino mi user de las opciones todo el div
+        //para que no haga funcion del mismo
+        //funciones de los botones
+        btnTemp.addEventListener('click', (e) => {
+            //console.log(`soy boton ${e.target.id}`);
+            e.target.setAttribute("disabled", "disabled");//para no ser click
+            let txtId = e.target.id.replace("b-Mamigo-user-","")//obtengo el id:dpi
+            let nodoUsuarioTemp = lsUsuario.buscarDPI(txtId)//busco id
+
+            logUser.info.GetPila().push(nodoUsuarioTemp)//agrego pila amigos
+
+            var user = nodoUsuarioTemp.info.GetDatos()["username"]
+            var dpi = nodoUsuarioTemp.info.GetDatos()["dpi"]
+            let btnHtml =`
+            <div class="d-artista-persona" id="d-Mamigo-amigo-${dpi}">
+                <h5 class="center-text">${user}</h5>
+                <button class="b-a-persona" disabled>
+                    <i class="bi bi-person-circle i-a-persona"></i>
+                </button>
+            </div>`
+            //desplieo <elemento amigos>
+            document.getElementById("d-Mamigo-amigo").insertAdjacentHTML('beforeend', btnHtml)
+        })
+        if (idT.replace("b-Mamigo-user-", "") == logUser.info.GetDatos()["dpi"].toString()) {
             document.getElementById(idT.replace("b-Mamigo-user-", "d-Mamigo-user-")).remove()
         }
     }
 })
-            //ELMINAR
+            //ELMINAR b-a-eliminar
+const btnPElminarA = document.getElementById('b-a-eliminar')
+btnPElminarA.addEventListener('click', (e) => {
+    let nodoAux=logUser.info.GetPila().pop()//saco el nodo
+    let dpi=nodoAux.info.GetDatos()["dpi"]//obtengo dpi
+    document.getElementById(`d-Mamigo-amigo-${dpi}`).remove()//remuevo de bloqueados
+    document.getElementById(`b-Mamigo-user-${dpi}`).removeAttribute('disabled')//remuvo ahora puede hacer click
+})
         //BLOQUEADOS
 //alert (document.getElementsByClassName('.col1').style.backgroundColor);
