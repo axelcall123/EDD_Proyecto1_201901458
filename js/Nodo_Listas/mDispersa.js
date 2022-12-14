@@ -2,7 +2,7 @@ import { nodoMD } from './nodoMD.js'
 export class matrizDispersa{
     constructor() {
         //dia(x),mes(y),info
-        this.raiz=new nodoMD(0,0,Raiz);
+        this.raiz=new nodoMD(0,0,"Raiz");
     }
     /*
     [H]<->[]<->[] dias(x)
@@ -26,16 +26,16 @@ export class matrizDispersa{
     buscarY(y,aux){
         while(aux!=null){
             if(aux.mes==y){
-                return {nodo:aux,simbolo:'='}
+                return {nodo:aux,posicion:'='}
             }else if(y<aux.mes){
-                return { nodo: aux, simbolo: '-' }
+                return { nodo: aux, posicion: '-' }
             }
             aux=aux.abajo
         }
-        return { nodo: aux, simbolo: '+' }
+        return { nodo: aux, posicion: '+' }
     }
     crearX(x){
-        return new nodoMD(x,0,1);
+        return new nodoMD(x,0,x);
     }
     crearY(y){
         return new nodoMD(0, y, getMonthName(y))
@@ -89,7 +89,7 @@ export class matrizDispersa{
     insertarNodo(dia,mes,info){
         const nuevo=new nodoMD(dia,mes,info)
         var auxX = this.buscarX(dia, this.raiz)
-        var auxY = this.buscaY(mes, this.raiz)
+        var auxY = this.buscarY(mes, this.raiz)
         //↑y(arr,abaj)
         //->x(sig,ant)
         //[ ][4][ ] [6]
@@ -105,25 +105,29 @@ export class matrizDispersa{
         //{nodo,simbolo}
         //#1 no e dia,no e mes
         if(auxX["posicion"]!="=" && auxY["posicion"]!="="){
-            this.insertarX(auxX["nodo"], this.crearX(x), auxX["posicion"], nuevo)//auxXY,nuevoXY,simbolo,nuevo
-            this.insertarY(auxY["nodo"], this.crearY(y), auxY["posicion"],nuevo)
+            this.insertarX(auxX["nodo"], this.crearX(dia), auxX["posicion"], nuevo)//auxXY,nuevoXY,simbolo,nuevo
+            this.insertarY(auxY["nodo"], this.crearY(mes), auxY["posicion"],nuevo)
         }
         //#2e dia, no e mes
         else if (auxX["posicion"]=="=" && auxY["posicion"] != "="){
-            this.insertarY(auxY["nodo"], this.crearY(y), auxY["posicion"], nuevo)//auxXY,nuevoXY,simbolo,nuevo
+            this.insertarY(auxY["nodo"], this.crearY(mes), auxY["posicion"], nuevo)//auxXY,nuevoXY,simbolo,nuevo
             auxY = this.buscarY(y, auxX["nodo"])//xy,aux change nodoX
             this.insertarY(auxY["nodo"],nuevo,auxY[1],null);//null para evitar errores
         }
         //#3no e dia,e mes
         else if (auxX["posicion"] != "=" && auxY["posicion"] == "="){
-            this.insertarX(auxX["nodo"], this.crearX(x), auxX["posicion"], nuevo)//auxXY,nuevoXY,simbolo,nuevo
+            this.insertarX(auxX["nodo"], this.crearX(dia), auxX["posicion"], nuevo)//auxXY,nuevoXY,simbolo,nuevo
             auxX = this.buscarX(x, nodoY[0])//xy,aux
             this.insertarX(auxX["nodo"], nuevo, auxX[1], null);//null para evitar errores
         }
         //#4 e dia, e mes
         else if (auxX["posicion"] == "=" && auxY["posicion"] == "=") {
-            auxY = this.buscarY(y, auxX["nodo"])//xy,aux change nodoX
-            auxY["nodo"]=info
+            let auxYT = this.buscarY(y, auxX["nodo"])//xy,aux change nodoX
+            let auxXT = this.buscarX(x, auxY["nodo"])//xy,aux change nodoX
+            
+            this.insertarY(auxYT["nodo"], nuevo, auxYT[1], null);//null para evitar errores
+            this.insertarX(auxXT["nodo"], nuevo, auxXT[1], null);//null para evitar errores
+            /*auxY["nodo"]=info*/
         }
     }
 }

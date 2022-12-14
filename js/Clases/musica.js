@@ -1,4 +1,4 @@
-class musica {
+export class Musica {
     constructor(month, day, song, artist) {
         this.month = month
         this.day = day
@@ -15,4 +15,3 @@ class musica {
     }
 
 }
-module.exports = musica;

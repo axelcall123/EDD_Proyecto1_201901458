@@ -38,9 +38,14 @@ export class listaSimple {
             aux=aux.siguiente;
         }
         if(aux==null){//LLEGO FINAL
-            return {TF:false,nodo:null}
-        } else if (pass == aux.info.GetDatos()["password"] && ad == aux.info.GetDatos()["admin"]){//USUARIO Y CONTRA
-            return {TF:true,nodo:aux}
+            return {AD:false,TF:false,nodo:null}
+        } else if (pass == aux.info.GetDatos()["password"]){//USUARIO Y CONTRA
+            if (ad == aux.info.GetDatos()["admin"]){//SI ES ADMIN
+                return {AD:true, TF: true, nodo: aux }
+            }else{//NO ES ADMIN
+                return {AD:false, TF: true, nodo: aux }
+            }
+            
         }//CONTRASEÑA MAL | ES NO ES ADMIN
             return {TF:false,nodo:aux}
     }
@@ -81,7 +86,7 @@ export class listaSimple {
         }
         return aux
     }
-    getHTML(){
+    getHTML(idBoton){//bloqueados o amigos
         let elementoL = new listaSimple()
         let idL =new listaSimple()
         let aux=this.primero
@@ -89,13 +94,13 @@ export class listaSimple {
             var user = aux.info.GetDatos()["username"]
             var dpi = aux.info.GetDatos()["dpi"]
             var elementoT=`
-            <div class="d-artista-persona" id="d-Mamigo-user-${dpi}">
+            <div class="d-artista-persona" id="d-M${idBoton}-user-${dpi}">
                 <h5 class="center-text">${user}</h5>
-                <button class="b-a-persona" id="b-Mamigo-user-${dpi}">
+                <button class="b-a-persona" id="b-M${idBoton}-user-${dpi}">
                     <i class="bi bi-person-circle i-a-persona"> </i>
                 </button>
             </div>`
-            var idT = `b-Mamigo-user-${dpi}`
+            var idT = `b-M${idBoton}-user-${dpi}`
             elementoL.insertarP(elementoT)
             idL.insertarP(idT)
             aux=aux.siguiente
@@ -124,8 +129,8 @@ export class listaSimple {
         
         if (this.primero != null) {
             const temp = new Nodo(this.ultimo.info);
-            aux=this.primero
-            for(var x=1;x<this.tamano;x++){
+            let aux=this.primero
+            for(var x=1;x<this.tamano-1;x++){
                 aux=aux.siguiente
             }
             aux.siguiente=null

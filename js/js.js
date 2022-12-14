@@ -43,6 +43,8 @@ import { Usuario } from './Clases/usuario.js'
 import { Artista } from './Clases/artista.js'
     //CANCION
 import { Cancion } from './Clases/cancion.js';
+    //MUSICA
+import { Musica } from './Clases/musica.js';
 var usuario = new Usuario(
     "0", "Alex", "GG", hash("1"), "12345678", true
 )
@@ -53,6 +55,8 @@ import { listaSimple } from './Nodo_Listas/lSimple.js'
 const lsUsuario=new listaSimple();
 import { listaLista } from './Nodo_Listas/lLista.js'
 const llArtista=new listaLista();
+import { matrizDispersa } from './Nodo_Listas/mDispersa.js';
+const matrizM=new matrizDispersa()
 //BOTONES
    //FORMULARIO-LOGIN
 const iUserL = document.getElementById('i_userL')
@@ -68,7 +72,7 @@ btnLogin.addEventListener('click',(e)=>{
     let log = lsUsuario.buscar(iUserL.value, hash(iPassL.value), iCheckL.checked)
     logUser=log["nodo"]
     if (log["TF"]){//COINCIDENCIA
-        if (iCheckL.checked){//si es admin pagina master
+        if (iCheckL.checked && log["AD"]){//si es admin pagina master
             //ocultar,mostrar
             ocultoPageLogin.style.display = "none";
             ocultoPageMaster.style.display = "block";
@@ -202,6 +206,46 @@ inpMSong.addEventListener('change', function () {//cambia (e)=> a funciont()
 }) 
         //PODCAST
         //MUSICAP
+const btnMFMusic = document.getElementById('b-f-Mmusic')
+let inpMMusic = document.createElement('input'); inpMMusic.type = 'file';
+btnMFMusic.addEventListener('click', (e) => {
+    inpMMusic.click();
+    inpMMusic.remove();
+})
+inpMMusic.addEventListener('change', function () {//cambia (e)=> a funciont()
+    let months={
+        "january":1,
+        "february":2,
+        "march":3,
+        "april":4,
+        "may":5,
+        "june":6,
+        "july":7,
+        "august":8,
+        "september":9,
+        "octuber":10,
+        "november":11,
+        "december": 12
+    }
+    
+    var fr = new FileReader();
+    fr.onload = function () {
+        const jsonObj = JSON.parse(fr.result)
+        jsonObj.forEach(element => {
+            //month,day,song,artist
+            let day = parseFloat(element["day"])
+            let month = months[element["month"].toLowerCase()]
+            let reg = new Musica(
+                month,//obtener el numero
+                day,
+                element["song"],
+                element["artist"]
+            )
+            matrizM.insertarNodo(day,month,reg)
+        });
+    }
+    fr.readAsText(this.files[0])
+})       
     //MASTER GRAPHIZ
         //USUARIOS
 const bgM_user = document.getElementById("b-g-M-user")
@@ -343,7 +387,7 @@ btnPAmigo.addEventListener('click', (e) => {
     ocultoPAmigo.style.display = 'block';
     //BLOQUEADOS
     ocultoPBloqueado.style.display = 'none';
-    let listaAux = lsUsuario.getHTML()
+    let listaAux = lsUsuario.getHTML("amigo")
     var padre = document.getElementById("d-Mamigo-user")//elimina todo los hijos por si las moscas
     while (padre.firstChild) {
         padre.firstChild.remove()
@@ -352,32 +396,9 @@ btnPAmigo.addEventListener('click', (e) => {
     while (padre.firstChild) {
         padre.firstChild.remove()
     }
-
+    
     document.getElementById("d-Mamigo-user").insertAdjacentHTML('beforeend', "<h5>Usuarios</h5>")
     document.getElementById("d-Mamigo-amigo").insertAdjacentHTML('beforeend', "<h5>Amigos</h5>")
-    /*const pilaAux=new listaSimple()
-
-    let clone=logUser.info.GetPila()
-    //let copiedPerson = Object.assign({}, person);
-    while (clone.Get().vacio()!=true){
-        var addAux=clone.Get().pop()
-        pilaAux.insertarU(addAux)
-        var user = addAux.info.GetDatos()["username"]
-        var dpi = addAux.info.GetDatos()["dpi"]
-        let btnHtml = `
-            <div class="d-artista-persona" id="d-Mamigo-amigo-${dpi}">
-                <h5 class="center-text">${user}</h5>
-                <button class="b-a-persona" disabled>
-                    <i class="bi bi-person-circle i-a-persona"></i>
-                </button>
-            </div>`
-        //desplieo <elemento amigos>
-        document.getElementById("d-Mamigo-amigo").insertAdjacentHTML('beforeend', btnHtml)
-    }
-    //FIXME:arreglar esto mijo
-    while (pilaAux.vacio()!=true){//volver a insertar
-        logUser.info.GetPila().insertarP(pilaAux.pop())
-    }*/
 
     while (listaAux["elemento"].vacio() != true && listaAux["id"].vacio() != true){//while de usuarios
         //depliego user por id
@@ -421,4 +442,71 @@ btnPElminarA.addEventListener('click', (e) => {
     document.getElementById(`b-Mamigo-user-${dpi}`).removeAttribute('disabled')//remuvo ahora puede hacer click
 })
         //BLOQUEADOS
+            //AGREGAR
+const btnPBlo = document.getElementById('b-index-Blo')
+btnPBlo.addEventListener('click', (e) => {
+    /*//MUSICA
+    ocultoPMusica.style.display = 'none';*/
+    //PLAY-LIST
+    ocultoPPL.style.display = 'none';
+    //ARTISTA
+    ocultoPArtista.style.display = 'none';
+    //AMIGOS
+    ocultoPAmigo.style.display = 'none';
+    //BLOQUEADOS
+    ocultoPBloqueado.style.display = 'block';
+    let listaAux = lsUsuario.getHTML("bloqueado")
+    var padre = document.getElementById("d-Mbloqueado-user")//elimina todo los hijos por si las moscas
+    while (padre.firstChild) {
+        padre.firstChild.remove()
+    }
+    padre = document.getElementById("d-Mbloqueado-bloqueado") //elimina todo los hijos por si las moscas
+    while (padre.firstChild) {
+        padre.firstChild.remove()
+    }
+
+    document.getElementById("d-Mbloqueado-user").insertAdjacentHTML('beforeend', "<h5>Usuarios</h5>")
+    document.getElementById("d-Mbloqueado-bloqueado").insertAdjacentHTML('beforeend', "<h5>Bloqueados</h5>")
+
+    while (listaAux["elemento"].vacio() != true && listaAux["id"].vacio() != true) {//while de usuarios
+        //depliego user por id
+        let idT = listaAux["id"].pop()
+        //despliego <elementos usuarios>
+        document.getElementById("d-Mbloqueado-user").insertAdjacentHTML('beforeend', listaAux["elemento"].pop())
+        let btnTemp = document.getElementById(idT)
+        //para que no haga funcion del mismo
+        //funciones de los botones
+        btnTemp.addEventListener('click', (e) => {
+            //console.log(`soy boton ${e.target.id}`);
+            e.target.setAttribute("disabled", "disabled");//para no ser click
+            let txtId = e.target.id.replace("b-Mbloqueado-user-", "")//obtengo el id:dpi
+            let nodoUsuarioTemp = lsUsuario.buscarDPI(txtId)//busco id
+
+            logUser.info.GetPila().push(nodoUsuarioTemp)//agrego pila amigos
+
+            var user = nodoUsuarioTemp.info.GetDatos()["username"]
+            var dpi = nodoUsuarioTemp.info.GetDatos()["dpi"]
+            let btnHtml = `
+            <div class="d-artista-persona" id="d-Mbloqueado-bloqueado-${dpi}">
+                <h5 class="center-text">${user}</h5>
+                <button class="b-a-persona" disabled>
+                    <i class="bi bi-person-circle i-a-persona"></i>
+                </button>
+            </div>`
+            //desplieo <elemento amigos>
+            document.getElementById("d-Mbloqueado-bloqueado").insertAdjacentHTML('beforeend', btnHtml)
+        })
+        if (idT.replace("b-Mbloqueado-user-", "") == logUser.info.GetDatos()["dpi"].toString()) {
+            document.getElementById(idT.replace("b-Mbloqueado-user-", "d-Mbloqueado-user-")).remove()
+        }
+    }
+})
+            //ELMINAR b-a-eliminar
+const btnPElminarB= document.getElementById('b-b-eliminar')
+btnPElminarB.addEventListener('click', (e) => {
+    /*let nodoAux = logUser.info.GetPila().pop()//saco el nodo
+    let dpi = nodoAux.info.GetDatos()["dpi"]//obtengo dpi
+    document.getElementById(`d-Mamigo-amigo-${dpi}`).remove()//remuevo de bloqueados
+    document.getElementById(`b-Mamigo-user-${dpi}`).removeAttribute('disabled')//remuvo ahora puede hacer click
+*/})
 //alert (document.getElementsByClassName('.col1').style.backgroundColor);

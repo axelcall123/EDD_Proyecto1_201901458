@@ -1,9 +1,20 @@
 const btn = document.getElementById('add')
 import { t } from "./ft.js";
-
+import { listaSimple } from "../Nodo_Listas/lSimple.js";
 btn.addEventListener('click', (e) => {
-    //let cont = 0;
-    let listaAux = t(10);
+    let simple=new listaSimple();
+    simple.add(0)
+    simple.add(1)
+    simple.add(2)
+    simple.add(3)
+    simple.add(4)
+
+    simple.remove()
+    simple.remove()
+    simple.remove()
+    simple.remove()
+    simple.remove()
+    /*let listaAux = t(10);
 
     const padre = document.getElementById("d-add")//elimina todo los hijos por si las moscas
     while (padre.firstChild) {
@@ -28,5 +39,5 @@ btn.addEventListener('click', (e) => {
     .width(900)
     .height(500)
     .renderDot(codigodot)
-    console.log("hola")
+    console.log("hola")*/
 })
