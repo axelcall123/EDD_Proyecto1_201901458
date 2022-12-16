@@ -24,3 +24,25 @@ export class NodoLL extends Nodo {
         this.zn = null;//z-
     }
 }
+
+export class nodoMD {
+    constructor(dia, mes, info) {
+        this.dia = dia
+        this.mes = mes
+        this.info = info
+
+        this.siguiente = null
+        this.anterior = null
+        this.arriba = null
+        this.abajo = null
+
+    }
+}
+
+export class NodoB {
+    constructor(info) {
+        this.info = info;
+        this.izquierda = null;
+        this.derecha = null;
+    }
+}

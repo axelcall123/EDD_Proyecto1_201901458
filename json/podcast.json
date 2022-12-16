@@ -1,0 +1,44 @@
+[
+    {
+        "name":"D",
+        "topic":"T1",
+        "guests":["i1","i2"],
+        "duration":5
+    },
+    {
+        "name":"B",
+        "topic":"T2",
+        "guests": ["i1","i2"],
+        "duration": 5
+    },
+    {
+        "name":"A",
+        "topic":"T3",
+        "guests": ["i1","i2"],
+        "duration": 5
+    },
+    {
+        "name":"C",
+        "topic":"T4",
+        "guests": ["i1","i2"],
+        "duration": 5
+    },
+    {
+        "name":"F",
+        "topic":"T5",
+        "guests": ["i1","i2"],
+        "duration": 5
+    },
+    {
+        "name":"E",
+        "topic":"T6",
+        "guests": ["i1","i2"],
+        "duration": 5
+    },
+    {
+        "name":"G",
+        "topic":"T7",
+        "guests": ["i1","i2"],
+        "duration": 5
+    }
+]

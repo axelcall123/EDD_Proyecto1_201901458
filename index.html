@@ -159,15 +159,16 @@
                 <div class="col-md"><i class="bi bi-people-fill i-graphic"></i></div>
             </div>
             <div class="col-md-2">
-                <div class="col-md"><button class="d-graphic" id="b-g-Martis">artistas</button></div>
+                <div class="col-md"><button class="d-graphic" id="b-g-M-artis">artistas</button></div>
                 <div class="col-md"><i class="bi bi-vinyl-fill i-graphic"></i></div>
             </div>
             <div class="col-md-2">
-                <div class="col-md"><button class="d-graphic" id="b-gM-music">musica</button></div>
+                <div class="col-md"><button class="d-graphic" id="b-g-M-musicp">musica p</button></div>
                 <div class="col-md"><i class="bi bi-file-earmark-music-fill i-graphic"></i></div>
             </div>
+        
             <div class="col-md-2">
-                <div class="col-md"><button class="d-graphic" id="b-g-Mpodcast">podcast</button></div>
+                <div class="col-md"><button class="d-graphic" id="b-g-M-podcast">podcast</button></div>
                 <div class="col-md"><i class="bi bi-mic-fill i-graphic"></i></div>
             </div>
             <div class="col-md-1"></div>
@@ -209,16 +210,69 @@
         <button class="btn navBtn" id="b-index-Art">Artistas</button>
         <button class="btn navBtn" id="b-index-Ami">Amigos</button>
         <button class="btn navBtn" id="b-index-Blo">Bloqueados</button>
+        <button class="btn navBtn" id="b-index-Pod">PodCast</button>
     </nav>
     <!--PAGINA PRINCIPAL-->
     <div class="container" id="d-main-page">
-        <!--DANGER(others)-->
+        <!--MUSICA-->
+        <!--DANGER(CANCION-L,CANCION-P)-->
+        <div class="row" id="d-m-musica">
+            <div class="col-md-12">
+                <div class="row" id="d-musica-musica">
+                    <!--CANCION-L-->
+    
+                </div>
+            </div>
+            <div class="col-md-8">
+                <!--MENU-->
+                <form action="" class="menu-main">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button class="btn btn-sm menu-boton" id="bMProgramar">Programar</button>
+                            <button class="btn btn-sm menu-boton" id="bMPublicar">Publicar</button>
+                            <button class="btn btn-sm menu-boton" id="bMVer">Ver</button>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="date" id="i-m-fecha" required>
+                            <div class="input-group mb-2 mr-sm-2">
+                                <!--NOMBRE-->
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="bi bi-person-fill"></i></div>
+                                </div>
+                                <input id="i-m-nombre" type="text" class="form-control" placeholder="Nombre" required>
+                            </div>
+                            <div class="input-group mb-2 mr-sm-2">
+                                <!--ALBUM-->
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="bi bi-briefcase-fill"></i></div>
+                                </div>
+                                <input id="i-m-album" type="password" class="form-control" placeholder="Album" required>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-4" id="d-musica-publicado">
+                <!--CANCION-P-->
+            </div>
+        </div>
         <!--PLAYLIST-->
         <!--DANGER(CANCION)-->
         <div class="row" id="d-m-playlist">
-            <div class="col-md-11" id="d-m-p-playlist">
+            <div class="col-sm-5"></div>
+            <div class="col-sm-2" id="d-m-p-playlist">
                 <!--CANCION-->
-                
+
+            </div>
+            <div class="col-sm-5"></div>
+            <hr>
+            <div class="row">
+                <div class="col-sm-6"></div>
+                <div class="col-sm-3">
+                    <button class="btn b-playlist" id="pl-ant">ᐊ</button>
+                    <button class="btn b-playlist" id="pl-sig">ᐅ</button>
+                </div>
+                <div class="col-sm-3"></div>
             </div>
         </div>
         <!--ARTISTA-->
@@ -288,6 +342,66 @@
             <hr>
             <button class="eliminar" id="b-b-eliminar">Eliminar</button>
         </div>
+        <!--PODCAST-->
+        <!--DANGER(CANCION)-->
+        <div class="row" id="d-m-podcast">
+            <div class="col-md-3">
+                <!--FPOD-->
+                <form action="" class="menu-main">
+                    <h1 class="center-text">PUBLICAR PODCAST</h1>
+            
+                    <div class="row">
+                        <i class="bi bi-cloud-download-fill menu-persona"></i>
+            
+                    </div>
+                    <div class="input-group mb-2 mr-sm-2">
+                        <!--NOMBRE-->
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="bi bi-person-fill"></i></div>
+                        </div>
+                        <input id="iPUser" type="text" class="form-control" placeholder="Nombre" required>
+                    </div>
+            
+                    <div class="input-group mb-2 mr-sm-2">
+                        <!--TEMA-->
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="bi bi-briefcase-fill"></i></div>
+                        </div>
+                        <input id="iPTema" type="text" class="form-control" placeholder="Tema" required>
+                    </div>
+            
+                    <div class="input-group mb-2 mr-sm-2">
+                        <!--INVITADOS-->
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="bi bi-people-fill"></i></div>
+                        </div>
+                        <input id="iPInvitado" type="text" class="form-control" placeholder="Invitado" required>
+                    </div>
+            
+                    <div class="input-group mb-2 mr-sm-2">
+                        <!--DURACION-->
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="bi bi-alarm-fill"></i></div>
+                        </div>
+                        <input id="iPDuracion" type="number" class="form-control" placeholder="Duracion" required>
+                    </div>
+            
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                            <button id="b-pod-public" type="button" class="btn btn-sm menu-boton">PUBLICAR</button>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-9">
+                <div class="row" id="d-podcast-musica">
+                    <!--POD-->
+                </div>
+            </div>
+        </div>
     </div>
 
     <!--SCRIPTS-->
@@ -295,12 +409,27 @@
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
         <!--PRINCIPAL-->
-        <script type="module" src="/js/js.js" ></script>
+        <script type="module" src="js/js.js" ></script>
+        <!--FUNC-->
+        <script type="module" src="js/func/func.js"></script>
         <!--CLASES-->
-        <script type="module" src="/js/Clases/usuario.js"></script>
-        <script type="module" src="/js/Clases/artista.js"></script>
+        <script type="module" src="js/Clases/usuario.js"></script>
+        <script type="module" src="js/Clases/artista.js"></script>
+        <script type="module" src="js/Clases/cancion.js"></script>
+        <script type="module" src="js/Clases/musica.js"></script>
+        <script type="module" src="js/Clases/podcast.js"></script>
         <!--LISTAS-->
-        <script type="module" src="/js/Nodo_Listas/lSimple.js"></script>
+        <script type="module" src="js/Nodo_Listas/lSimple.js"></script>
+        <script type="module" src="js/Nodo_Listas/binario.js"></script>
+        <script type="module" src="js/Nodo_Listas/lDEnalazada.js"></script>
+        <script type="module" src="js/Nodo_Listas/lLista.js"></script>
+        <script type="module" src="js/Nodo_Listas/mDispersa.js"></script>
+        <script type="module" src="js/Nodo_Listas/Nodo.js"></script>
+        <script type="module" src="js/Nodo_Listas/nodoMD.js"></script>
+        <!--GRAPHVIZ-->
+        <script src="https://d3js.org/d3.v5.min.js"></script>
+        <script src="https://unpkg.com/@hpcc-js/wasm@0.3.11/dist/index.min.js"></script>
+        <script src="https://unpkg.com/d3-graphviz@3.0.5/build/d3-graphviz.js"></script>
 </body>
 
 </html>

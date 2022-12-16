@@ -1,19 +1,10 @@
 const btn = document.getElementById('add')
 import { t } from "./ft.js";
 import { listaSimple } from "../Nodo_Listas/lSimple.js";
+import { ordenAlfa } from "../func/func.js";
 btn.addEventListener('click', (e) => {
-    let simple=new listaSimple();
-    simple.add(0)
-    simple.add(1)
-    simple.add(2)
-    simple.add(3)
-    simple.add(4)
-
-    simple.remove()
-    simple.remove()
-    simple.remove()
-    simple.remove()
-    simple.remove()
+    let ver=ordenAlfa("alex","alex1")
+    console.log(`${ver["may"]}>${ver["men"]}`)
     /*let listaAux = t(10);
 
     const padre = document.getElementById("d-add")//elimina todo los hijos por si las moscas

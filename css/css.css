@@ -155,3 +155,8 @@ button.b-az{
 .eliminar:hover{
     background-color: red;
 }
+/*play-list*/
+.b-playlist{
+    float: left;
+    width: 50px;
+}

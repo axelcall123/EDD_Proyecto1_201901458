@@ -59,24 +59,30 @@ export class listaLista {
         let rank="{rank=same"//{rank=same;nodo_1;nodo_2}
         let cont1 = 0
         let cont2=0
-        let pilaUNodoS = new listaSimple()
-        let pilaRank = new listaSimple()
+        let pilaUNodoS = new listaSimple()//sig->sig->
+        let pilaRank = new listaSimple()//rank=same
         while (aux != null) {//abajo
             let nombre = aux.info.GetDatos()["name"]
             contNodo = contNodo + `nodo_${cont1} [${box} label="${nombre}"]\n`
             rank=rank+`;nodo_${cont1}`
             
-            
-            unionNodoSig = unionNodoSig + `nodo_${cont}->`//der
+            if (aux.zp != null) {
+                unionNodoSig = unionNodoSig + `nodo_${cont1}->`//der
+            }else{
+                unionNodoSig = unionNodoSig + `nodo_${cont1}`//evitar errores
+            }
             if(aux.zp!=null){//derecha
-                temp=aux.zp
+                let temp=aux.zp
                 cont2=0
                 while(temp!=null){
                     nombre = temp.info.GetDatos()["name"]
                     contNodo = contNodo + `nodo_${cont1}_${cont2} [${box} label="${nombre}"]\n`
                     rank = rank + `;nodo_${cont1}_${cont2}`
-                    unionNodoSig = unionNodoSig + `nodo_${cont1}_${cont2}->`//der
-
+                    if(temp.zp!=null){
+                        unionNodoSig = unionNodoSig + `nodo_${cont1}_${cont2}->`//der
+                    }else{
+                        unionNodoSig = unionNodoSig + `nodo_${cont1}_${cont2}`//der
+                    }   
                     temp=temp.zp
                     cont2++
                 }
@@ -88,21 +94,24 @@ export class listaLista {
             //default
             rank = "{rank=same"
             unionNodoSig = ""
-
-            unionNodoAb = unionNodoAb + `nodo_${cont}->`
+            if(aux.siguiente!=null){
+                unionNodoAb = unionNodoAb + `nodo_${cont1}->`
+            }else{//evitar errores
+                unionNodoAb = unionNodoAb + `nodo_${cont1}`
+            }
+            
             aux=aux.siguiente
             cont1++
         }
         var union1=""
-        while (pilaUNodo.vacio()!=true){
-            union1 = union1 + pilaUNodo.pop()
+        while (pilaUNodoS.vacio()!=true){
+            union1 = union1 + pilaUNodoS.pop()
         }
         while (pilaRank.vacio() != true) {
             union1 = union1 + pilaRank.pop()
         }
-        contenido=contNodo+union1+unionNodoAb
+        let contenido=contNodo+union1+unionNodoAb
         let codigodot = `digraph {
-            rankdir=LR
             ${contenido}
         }`
         return codigodot

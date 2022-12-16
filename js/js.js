@@ -19,8 +19,8 @@ const ocultoPageMain = document.getElementById('d-main-page');
 ocultoPageMain.style.display = 'none';
     //OCULTO MAIN
         //MUSICA
-/*const ocultoPMusica = document.getElementById('')
-ocultoPMusica.style.display = 'none';*/
+const ocultoPMusica = document.getElementById('d-m-musica')
+ocultoPMusica.style.display = 'none';
         //PLAY-LIST
 const ocultoPPL = document.getElementById('d-m-playlist')
 ocultoPPL.style.display = 'none';
@@ -33,6 +33,9 @@ ocultoPAmigo.style.display = 'none';
         //BLOQUEADOS
 const ocultoPBloqueado = document.getElementById('d-m-bloqueados')
 ocultoPBloqueado.style.display = 'none';
+        //PODCAST
+const ocultoPPodC = document.getElementById('d-m-podcast')
+ocultoPPodC.style.display = 'none';
 //FUNCIONES
 import { hash } from './func/func.js'
 import {funcAsync } from './func/func.js'
@@ -45,6 +48,8 @@ import { Artista } from './Clases/artista.js'
 import { Cancion } from './Clases/cancion.js';
     //MUSICA
 import { Musica } from './Clases/musica.js';
+    //PODCAST
+import { PodCast } from './Clases/podcast.js';
 var usuario = new Usuario(
     "0", "Alex", "GG", hash("1"), "12345678", true
 )
@@ -57,6 +62,8 @@ import { listaLista } from './Nodo_Listas/lLista.js'
 const llArtista=new listaLista();
 import { matrizDispersa } from './Nodo_Listas/mDispersa.js';
 const matrizM=new matrizDispersa()
+import { ABB } from './Nodo_Listas/binario.js';
+const abPod=new ABB()
 //BOTONES
    //FORMULARIO-LOGIN
 const iUserL = document.getElementById('i_userL')
@@ -134,6 +141,7 @@ btnROut.addEventListener('click', (e) => {
 const btnMFUser = document.getElementById('b-f-Muser')
 let inpMFUser = document.createElement('input'); inpMFUser.type = 'file';
 btnMFUser.addEventListener('click', (e) => {
+    e.preventDefault()
     inpMFUser.click();
     inpMFUser.remove();
 })
@@ -160,6 +168,7 @@ inpMFUser.addEventListener('change',function(){//cambia (e)=> a funciont()
 const btnMFArtist = document.getElementById('b-f-Martis')
 let inpMArtist = document.createElement('input'); inpMArtist.type = 'file';
 btnMFArtist.addEventListener('click', (e) => {
+    e.preventDefault()
     inpMArtist.click();
     inpMArtist.remove();
 })
@@ -183,6 +192,7 @@ inpMArtist.addEventListener('change', function () {//cambia (e)=> a funciont()
         //CANCIONES
 let inpMSong = document.createElement('input'); inpMSong.type = 'file';
 btnMFSong.addEventListener('click', (e) => {
+    e.preventDefault()
     inpMSong.click();
     inpMSong.remove();
 })
@@ -204,11 +214,36 @@ inpMSong.addEventListener('change', function () {//cambia (e)=> a funciont()
     }
     fr.readAsText(this.files[0])
 }) 
-        //PODCAST
+        //PODCAST 
+const btnMFPod = document.getElementById('b-f-Mpodcast')
+let inpMPod = document.createElement('input'); inpMPod.type = 'file';
+btnMFPod.addEventListener('click', (e) => {
+    e.preventDefault()
+    inpMPod.click();
+    inpMPod.remove();
+})
+inpMPod.addEventListener('change', function () {//cambia (e)=> a funciont()
+    var fr = new FileReader();
+    fr.onload = function () {
+        const jsonObj = JSON.parse(fr.result)
+        jsonObj.forEach(element => {
+            //name,topic,guests,duration
+            let reg = new PodCast(
+                element["name"],
+                element["topic"],
+                element["guests"],
+                element["duration"]
+            )
+            abPod.insertar(reg)
+        });
+    }
+    fr.readAsText(this.files[0])
+})         
         //MUSICAP
 const btnMFMusic = document.getElementById('b-f-Mmusic')
 let inpMMusic = document.createElement('input'); inpMMusic.type = 'file';
 btnMFMusic.addEventListener('click', (e) => {
+    e.preventDefault()
     inpMMusic.click();
     inpMMusic.remove();
 })
@@ -223,7 +258,7 @@ inpMMusic.addEventListener('change', function () {//cambia (e)=> a funciont()
         "july":7,
         "august":8,
         "september":9,
-        "octuber":10,
+        "october":10,
         "november":11,
         "december": 12
     }
@@ -250,11 +285,35 @@ inpMMusic.addEventListener('change', function () {//cambia (e)=> a funciont()
         //USUARIOS
 const bgM_user = document.getElementById("b-g-M-user")
 bgM_user.addEventListener('click', (e) => {
-
+    //console.log(lsUsuario.graphviz())
+    d3.select("#b-MGraph")
+        .graphviz()
+        .renderDot(lsUsuario.graphviz())
 })
-        //ARTISTAS
-        //MUSICA
-        //PODCAST
+        //ARTISTA
+const bgM_art = document.getElementById("b-g-M-artis")
+bgM_art.addEventListener('click', (e) => {
+    //console.log(llArtista.graphviz())
+    d3.select("#b-MGraph")
+        .graphviz()
+        .renderDot(llArtista.graphviz())
+})
+        //MUSICA P
+const bgM_musica = document.getElementById("b-g-M-musicp")
+bgM_musica.addEventListener('click', (e) => {
+    //console.log(matrizM.graphviz())
+    d3.select("#b-MGraph")
+        .graphviz()
+        .renderDot(matrizM.graphviz())
+})
+        //PODCAST 
+const bgM_podcast = document.getElementById("b-g-M-podcast")
+bgM_podcast.addEventListener('click', (e) => {
+    //console.log(abPod.graphviz())
+    d3.select("#b-MGraph")
+        .graphviz()
+        .renderDot(abPod.graphviz())
+})
     //MASTER SALIR
 const btnMOut = document.getElementById('b-m-out');
 btnMOut.addEventListener('click', (e) => {
@@ -262,12 +321,99 @@ btnMOut.addEventListener('click', (e) => {
     ocultoPageLogin.style.display = "block";
 })
     //MAIN PAGE
-        //MUSICA
+        //MUSICA 
+const btnPMusica = document.getElementById('b-index-musica')
+btnPMusica.addEventListener('click', (e) => {
+    //MUSICA
+    ocultoPMusica.style.display = 'block';
+    //PLAY-LIST
+    ocultoPPL.style.display = 'none';
+    //ARTISTA
+    ocultoPArtista.style.display = 'none';
+    //AMIGOS
+    ocultoPAmigo.style.display = 'none';
+    //BLOQUEADOS
+    ocultoPBloqueado.style.display = 'none';
+    //PODCAST
+    ocultoPPodC.style.display = 'none';
+
+    let listaAux = matrizM.getHTML()
+
+    var padre = document.getElementById("d-musica-musica")//elimina todo los hijos por si las moscas
+    while (padre.firstChild) {
+        padre.firstChild.remove()
+    }
+    padre = document.getElementById("d-musica-publicado") //elimina todo los hijos por si las moscas
+    while (padre.firstChild) {
+        padre.firstChild.remove()
+    }
+
+    while (listaAux["elemento"].vacio() != true) {//while de musica
+        //despliego <elementos musica>
+        document.getElementById("d-musica-musica").insertAdjacentHTML('beforeend', listaAux["elemento"].pop())
+    }
+})
+const inpFecha = document.getElementById('i-m-fecha')
+            //PROGRAMAR
+const btnProgramar = document.getElementById('bMProgramar')
+btnProgramar.addEventListener('click', (e) => {
+    var padre = document.getElementById("d-musica-musica")//elimina todo los hijos por si las moscas
+    while (padre.firstChild) {
+        padre.firstChild.remove()
+    }
+    //año-mes-dia 0-1-2
+    let arrayF = inpFecha.value.split("-")
+    const nombre= document.getElementById("i-m-nombre")
+    //const sonido = document.getElementById("i-m-album")
+    let reg = new Musica(arrayF[1], arrayF[2], nombre, logUser.GetDatos()["username"])
+    
+    matrizM.insertarNodo(arrayF[2], arrayF[1], reg)
+    let listaAux = matrizM.getHTML()
+    while (listaAux["elemento"].vacio() != true) {//while de musica
+        //despliego <elementos musica>
+        document.getElementById("d-musica-musica").insertAdjacentHTML('beforeend', listaAux["elemento"].pop())
+    }
+})
+            //PUBLICAR
+const btnPublicar = document.getElementById('bMPublicar')
+btnPublicar.addEventListener('click', (e) => {
+    //const nombre = document.getElementById("i-m-nombre")
+    const sonido = document.getElementById("i-m-album")
+    //name, age, country
+    var reg = new Artista(
+        logUser.GetDatos()["username"],
+        0,
+        "n"
+    );
+    llArtista.insertarUMain(reg);
+    //artist, name, duration,gender
+    reg = new Cancion(
+        logUser.GetDatos()["username"],
+        sonido,
+        0,
+        ["n"]
+    )
+    llArtista.insertarPSub(element["artist"],reg);     
+})
+            //VER
+const btnMver= document.getElementById('bMVer')
+btnMver.addEventListener('click', (e) => {
+    padre = document.getElementById("d-musica-publicado") //elimina todo los hijos por si las moscas
+    while (padre.firstChild) {
+        padre.firstChild.remove()
+    }
+    //año-mes-dia 0-1-2
+    let arrayF=inpFecha.value.split("-")
+    //buscar
+    let txtAux = matrizM.buscarXY(arrayF[2],arrayF[1])
+    document.getElementById("d-musica-publicado").insertAdjacentHTML('beforeend', txtAux)
+})        
         //PLAYLIST
 const btnPPlayL = document.getElementById('b-index-play')
+let playList=null
 btnPPlayL.addEventListener('click', (e) => {
-    /*//MUSICA
-    ocultoPMusica.style.display = 'none';*/
+    //MUSICA
+    ocultoPMusica.style.display = 'none';
     //PLAY-LIST
     ocultoPPL.style.display = 'block';
     //ARTISTA
@@ -276,13 +422,51 @@ btnPPlayL.addEventListener('click', (e) => {
     ocultoPAmigo.style.display = 'none';
     //BLOQUEADOS
     ocultoPBloqueado.style.display = 'none';
+    //PODCAST
+    ocultoPPodC.style.display = 'none';
     //FIXME:si ya hay
+
+    var padre = document.getElementById("d-Mamigo-user")//elimina todo los hijos por si las moscas
+    while (padre.firstChild) {
+        padre.firstChild.remove()
+    }
+    let aux = logUser.info.GetPlayList().getHTML(null, "=")
+    btnHtml = aux["html"]
+    playList = aux["nodo"]
+    //despliego <elemento playList>
+    document.getElementById("d-m-p-playlist").insertAdjacentHTML('beforeend', btnHtml)
 })
+            //SIG 
+const btnPPlayLs = document.getElementById('pl-sig')
+btnPPlayLs.addEventListener('click', (e) => {
+    var padre = document.getElementById("d-Mamigo-user")//elimina todo los hijos por si las moscas
+    while (padre.firstChild) {
+        padre.firstChild.remove()
+    }
+    let aux = logUser.info.GetPlayList().getHTML(playList, "->")
+    btnHtml = aux["html"]
+    playList = aux["nodo"]
+    //despliego <elemento playList>
+    document.getElementById("d-m-p-playlist").insertAdjacentHTML('beforeend', btnHtml)
+})   
+            //ANT 
+const btnPPlayLa = document.getElementById('pl-ant')
+btnPPlayLa.addEventListener('click', (e) => {
+    var padre = document.getElementById("d-Mamigo-user")//elimina todo los hijos por si las moscas
+    while (padre.firstChild) {
+        padre.firstChild.remove()
+    }
+    let aux = logUser.info.GetPlayList().getHTML(playList, "<-")
+    btnHtml = aux["html"]
+    playList = aux["nodo"]
+    //despliego <elemento playList>
+    document.getElementById("d-m-p-playlist").insertAdjacentHTML('beforeend', btnHtml)
+}) 
         //ARTISTA
 const btnPArtista = document.getElementById('b-index-Art')
 btnPArtista.addEventListener('click', (e) => {
-    /*//MUSICA
-    ocultoPMusica.style.display = 'none';*/
+    //MUSICA
+    ocultoPMusica.style.display = 'none';
     //PLAY-LIST
     ocultoPPL.style.display = 'none';
     //ARTISTA
@@ -291,6 +475,8 @@ btnPArtista.addEventListener('click', (e) => {
     ocultoPAmigo.style.display = 'none';
     //BLOQUEADOS
     ocultoPBloqueado.style.display = 'none';
+    //PODCAST
+    ocultoPPodC.style.display = 'none';
 
     let listaAux = llArtista.getHTML()
     var padre = document.getElementById("d-artista-artista")//elimina todo los hijos por si las moscas
@@ -301,7 +487,7 @@ btnPArtista.addEventListener('click', (e) => {
     while (padre.firstChild) {
         padre.firstChild.remove()
     }
-
+    
     //while artistas div and button
     //pila de ids
     let idsArtistas = new listaSimple()
@@ -318,8 +504,7 @@ btnPArtista.addEventListener('click', (e) => {
         //invisibles toda la musica
         document.getElementById(idTA.replace("b-MArt-art-", "d-MArt-art-")).style.display = "none";
         let btnTempA = document.getElementById(idTA)
-        //para que no haga funcion del mismo;funciones de los botones
-        
+        //para que no haga funcion del mismo;funciones de los botones 
         
         idsArtistas.push(idTA)//ingresar ids
         btnTempA.addEventListener('click', (e) => {
@@ -351,24 +536,6 @@ btnPArtista.addEventListener('click', (e) => {
                 let ids = temp.split("-");//obtengo el id1(artista)-id2(musica)
                 let nodoUsuarioTemp = llArtista.buscarIDS(parseInt(ids[0],10), parseInt(ids[1],10))
                 logUser.info.GetPlayList().insertar(nodoUsuarioTemp)//agrego play list
-                
-                var nombre = nodoUsuarioTemp.info.GetDatos()["name"]
-                var duracion = nodoUsuarioTemp.info.GetDatos()["duration"]
-                let btnHtml = `
-                    <div class="d-4-cancion">
-                    <div class="d-cancion">
-                        <button class="btn" disabled><i class="bi bi-file-play-fill"></i></button>
-                        <h4 class="center-text music">PLAYLIST</h4>
-                        <i class="bi bi-headset i-headset"></i>
-                        <i class="bi bi-caret-left-fill retroceso"></i>
-                        <h6 class="duracion">${duracion}</h6>
-                        <i class="bi bi-caret-right-fill adelantar"></i>
-                        <h5 class="center-text nombre-cancion">${nombre}</h5>
-                    </div>
-                </div>
-                `
-                //despliego <elemento playList>
-                document.getElementById("d-m-p-playlist").insertAdjacentHTML('beforeend', btnHtml)
             })
         }
     }
@@ -377,8 +544,8 @@ btnPArtista.addEventListener('click', (e) => {
             //AGREGAR
 const btnPAmigo = document.getElementById('b-index-Ami')
 btnPAmigo.addEventListener('click', (e) => {
-    /*//MUSICA
-    ocultoPMusica.style.display = 'none';*/
+    //MUSICA
+    ocultoPMusica.style.display = 'none';
     //PLAY-LIST
     ocultoPPL.style.display = 'none';
     //ARTISTA
@@ -387,6 +554,9 @@ btnPAmigo.addEventListener('click', (e) => {
     ocultoPAmigo.style.display = 'block';
     //BLOQUEADOS
     ocultoPBloqueado.style.display = 'none';
+    //PODCAST
+    ocultoPPodC.style.display = 'none';
+
     let listaAux = lsUsuario.getHTML("amigo")
     var padre = document.getElementById("d-Mamigo-user")//elimina todo los hijos por si las moscas
     while (padre.firstChild) {
@@ -396,9 +566,31 @@ btnPAmigo.addEventListener('click', (e) => {
     while (padre.firstChild) {
         padre.firstChild.remove()
     }
-    
     document.getElementById("d-Mamigo-user").insertAdjacentHTML('beforeend', "<h5>Usuarios</h5>")
     document.getElementById("d-Mamigo-amigo").insertAdjacentHTML('beforeend', "<h5>Amigos</h5>")
+    //FIXME:si ya hay
+    //imprimir por si existe
+    let pila = logUser.info.GetPila()//imprimir por si existe
+    let pilaAux = new listaSimple()
+    while (pila.vacio() != true) {
+        let infoPila=pila.pop()
+        var user = infoPila.GetDatos()["username"]
+        var dpi = infoPila.GetDatos()["dpi"]
+        let btnHtml = `
+            <div class="d-artista-persona" id="d-Mamigo-amigo-${dpi}">
+                <h5 class="center-text">${user}</h5>
+                <button class="b-a-persona" disabled>
+                    <i class="bi bi-person-circle i-a-persona"></i>
+                </button>
+            </div>`
+        //desplieo <elemento amigos>
+        document.getElementById("d-Mamigo-amigo").insertAdjacentHTML('beforeend', btnHtml)
+        pilaAux.push(infoPila)
+    }
+
+    while (pilaAux.vacio() != true) {//volver a ingrear de nuevo la pila
+        pila.push(pilaAux.pop())
+    }
 
     while (listaAux["elemento"].vacio() != true && listaAux["id"].vacio() != true){//while de usuarios
         //depliego user por id
@@ -433,7 +625,7 @@ btnPAmigo.addEventListener('click', (e) => {
         }
     }
 })
-            //ELMINAR b-a-eliminar
+            //ELMINAR
 const btnPElminarA = document.getElementById('b-a-eliminar')
 btnPElminarA.addEventListener('click', (e) => {
     let nodoAux=logUser.info.GetPila().pop()//saco el nodo
@@ -445,8 +637,8 @@ btnPElminarA.addEventListener('click', (e) => {
             //AGREGAR
 const btnPBlo = document.getElementById('b-index-Blo')
 btnPBlo.addEventListener('click', (e) => {
-    /*//MUSICA
-    ocultoPMusica.style.display = 'none';*/
+    //MUSICA
+    ocultoPMusica.style.display = 'none';
     //PLAY-LIST
     ocultoPPL.style.display = 'none';
     //ARTISTA
@@ -455,6 +647,9 @@ btnPBlo.addEventListener('click', (e) => {
     ocultoPAmigo.style.display = 'none';
     //BLOQUEADOS
     ocultoPBloqueado.style.display = 'block';
+    //PODCAST
+    ocultoPPodC.style.display = 'none';
+
     let listaAux = lsUsuario.getHTML("bloqueado")
     var padre = document.getElementById("d-Mbloqueado-user")//elimina todo los hijos por si las moscas
     while (padre.firstChild) {
@@ -467,6 +662,30 @@ btnPBlo.addEventListener('click', (e) => {
 
     document.getElementById("d-Mbloqueado-user").insertAdjacentHTML('beforeend', "<h5>Usuarios</h5>")
     document.getElementById("d-Mbloqueado-bloqueado").insertAdjacentHTML('beforeend', "<h5>Bloqueados</h5>")
+
+    //FIXME:si ya hay
+    //imprimir por si existe
+    let pila = logUser.info.GetCola()//imprimir por si existe
+    let pilaAux = new listaSimple()
+    while (pila.vacio() != true) {
+        let infoPila = pila.pop()
+        var user = infoPila.GetDatos()["username"]
+        var dpi = infoPila.GetDatos()["dpi"]
+        let btnHtml = `
+            <div class="d-artista-persona" id="d-Mbloqueado-bloqueado-${dpi}">
+                <h5 class="center-text">${user}</h5>
+                <button class="b-a-persona" disabled>
+                    <i class="bi bi-person-circle i-a-persona"></i>
+                </button>
+            </div>`
+        //desplieo <elemento amigos>
+        document.getElementById("d-Mamigo-amigo").insertAdjacentHTML('beforeend', btnHtml)
+        pilaAux.push(infoPila)
+    }
+    while (pilaAux.vacio() != true) {//volver a ingrear de nuevo la pila
+        pila.push(pilaAux.pop())
+    }
+
 
     while (listaAux["elemento"].vacio() != true && listaAux["id"].vacio() != true) {//while de usuarios
         //depliego user por id
@@ -482,7 +701,7 @@ btnPBlo.addEventListener('click', (e) => {
             let txtId = e.target.id.replace("b-Mbloqueado-user-", "")//obtengo el id:dpi
             let nodoUsuarioTemp = lsUsuario.buscarDPI(txtId)//busco id
 
-            logUser.info.GetPila().push(nodoUsuarioTemp)//agrego pila amigos
+            logUser.info.GetCola().add(nodoUsuarioTemp)//agrego pila amigos
 
             var user = nodoUsuarioTemp.info.GetDatos()["username"]
             var dpi = nodoUsuarioTemp.info.GetDatos()["dpi"]
@@ -501,12 +720,59 @@ btnPBlo.addEventListener('click', (e) => {
         }
     }
 })
-            //ELMINAR b-a-eliminar
+            //ELMINAR
 const btnPElminarB= document.getElementById('b-b-eliminar')
 btnPElminarB.addEventListener('click', (e) => {
-    /*let nodoAux = logUser.info.GetPila().pop()//saco el nodo
+    let nodoAux = logUser.info.GetCola().remove()//saco el nodo
     let dpi = nodoAux.info.GetDatos()["dpi"]//obtengo dpi
-    document.getElementById(`d-Mamigo-amigo-${dpi}`).remove()//remuevo de bloqueados
-    document.getElementById(`b-Mamigo-user-${dpi}`).removeAttribute('disabled')//remuvo ahora puede hacer click
-*/})
+    document.getElementById(`d-Mbloqueado-bloqueado-${dpi}`).remove()//remuevo de bloqueados
+    document.getElementById(`b-Mbloqueado-user-${dpi}`).removeAttribute('disabled')//remuvo ahora puede hacer click
+})
+    //PODCAST
+const btnPPod = document.getElementById('b-index-Pod')
+btnPPod.addEventListener('click', (e) => {
+    //MUSICA
+    ocultoPMusica.style.display = 'none';
+    //PLAY-LIST
+    ocultoPPL.style.display = 'none';
+    //ARTISTA
+    ocultoPArtista.style.display = 'none';
+    //AMIGOS
+    ocultoPAmigo.style.display = 'none';
+    //BLOQUEADOS
+    ocultoPBloqueado.style.display = 'none';
+    //PODCAST
+    ocultoPPodC.style.display = 'block';
+
+    let listaAux = abPod.getHTML()
+    var padre = document.getElementById("d-podcast-musica")//elimina todo los hijos por si las moscas
+    while (padre.firstChild) {
+        padre.firstChild.remove()
+    }
+    while (listaAux["elemento"].vacio() != true){
+        //despliego <elementos usuarios>
+        document.getElementById("d-podcast-musica").insertAdjacentHTML('beforeend', listaAux["elemento"].pop())
+    }
+})
+
+        //AGREGAR
+const btnPublicarP = document.getElementById('b-pod-public')
+btnPublicarP.addEventListener('click', (e) => {
+    e.preventDefault()
+    //let regUsuario = new Usuario(parseInt(iDpiR.value), iNameR.value, iUserR.value, hash(iPassR.value), parseInt(iPhoneR.value),false);
+    //name, topic, guests, duration
+    let array = iPInvitado.value.split(",")
+    let newPod = new PodCast(iPUser.value, iPTema.value, array, parseInt(iPDuracion.value));
+    abPod.insertar(newPod);
+
+    let listaAux = abPod.getHTML()
+    var padre = document.getElementById("d-podcast-musica")//elimina todo los hijos por si las moscas
+    while (padre.firstChild) {
+        padre.firstChild.remove()
+    }
+    while (listaAux["elemento"].vacio() != true) {
+        //despliego <elementos usuarios>
+        document.getElementById("d-podcast-musica").insertAdjacentHTML('beforeend', listaAux["elemento"].pop())
+    }
+})
 //alert (document.getElementsByClassName('.col1').style.backgroundColor);

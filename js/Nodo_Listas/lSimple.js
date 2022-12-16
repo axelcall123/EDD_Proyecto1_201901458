@@ -51,7 +51,7 @@ export class listaSimple {
     }
     //SOLO PARA USUARIO
     graphviz(){
-        let aux=this.ultimo
+        let aux=this.primero
 
         let box="shape=box"
 
@@ -63,7 +63,7 @@ export class listaSimple {
             let user=aux.info.GetDatos()["username"]
 
             contNodo = contNodo + `nodo_${cont} [${box} label="${dpi}\n${user}"]\n`
-            if(cont<=this.tamano){
+            if(cont<this.tamano-1){
                 unionNodo = unionNodo + `nodo_${cont}->`
             }else{
                 unionNodo = unionNodo + `nodo_${cont}\n`
@@ -123,7 +123,7 @@ export class listaSimple {
         }
     }
     add(info){
-        this.insertarU(info)
+        this.insertarP(info)
     }
     remove(){
         

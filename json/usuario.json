@@ -2,7 +2,7 @@
 {
 	"dpi":3000000000001,
 	"name":"name1",
-	"username":"a",
+	"username":"user1",
 	"password":"a",
 	"phone":10000001,
 	"admin":false
