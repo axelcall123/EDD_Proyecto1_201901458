@@ -286,9 +286,9 @@ export class matrizDispersa{
     }
     buscarXY(dia,mes){
         var temp=this.buscarX(dia,this.raiz)//busca->[]->[]
-        temp = this.buscarY(mes, this.raiz)//NODO
-        let song = temp.info.GetDatos()["song"]
-        let artist = temp.info.GetDatos()["artist"]
+        temp = this.buscarY(mes, temp["nodo"])//NODO
+        let song = temp["nodo"].info.GetDatos()["song"]
+        let artist = temp["nodo"].info.GetDatos()["artist"]
         var elementoT = `
         <div class="d-4-cancion">
         <div class="d-cancion">

@@ -32,20 +32,25 @@ export class listaLista {
         //[aux]->[inicio]<->[]<->[final]
         let aux = this.primero;
         if (this.primero != null) {
-            while (aux.info.GetDatos()["name"] != buscar && aux != null) {//BUSCO NODO
+            while (aux != null) {//BUSCO NODO
+                if (aux.info.GetDatos()["name"] == buscar){
+                    break
+                }
                 aux = aux.siguiente;
             }
             if (aux!=null) {//insertar sub-nodo
-                const nuevo = new NodoLL(info);
-                nuevo.id = this.subCId
-                if (aux.zp == null) {
-                    aux.zp = nuevo;
-                } else {
-                    nuevo.zp = aux.zp;
-                    aux.zp.zn =nuevo;
-                    aux.zp=nuevo;
+                if (aux.info.GetDatos()["name"] == buscar) {
+                    const nuevo = new NodoLL(info);
+                    nuevo.id = this.subCId
+                    if (aux.zp == null) {
+                        aux.zp = nuevo;
+                    } else {
+                        nuevo.zp = aux.zp;
+                        aux.zp.zn = nuevo;
+                        aux.zp = nuevo;
+                    }
+                    this.subCId++
                 }
-                this.subCId++
             }//else{CREA EL NODO} por que ya fueron crados los nodos
         }
     }
@@ -154,7 +159,7 @@ export class listaLista {
                         <div class="d-4-cancion">
                         <div class="d-cancion">
                             <button class="btn" id="b-MArt-mus-${aux.id}-${temp.id}">
-                                <i class="bi bi-plus addP"></i>
+                                <i class="addP">+</i>
                             </button>
                             <h4 class="center-text music">MUSICA</h4>
                             <i class="bi bi-headset i-headset"></i>
@@ -191,6 +196,6 @@ export class listaLista {
         while (aux.id != id2) {
             aux=aux.zp
         }
-        return aux
+        return aux.info
     }
 }

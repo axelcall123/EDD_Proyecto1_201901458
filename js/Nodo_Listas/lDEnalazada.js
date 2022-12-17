@@ -20,13 +20,13 @@ export class ldEnlazada {
         let sig=null
         let ant=null
         
-        if(SA="->"){
-            sig = (nodoA) => { nodoA.siguiente }
+        if(SA=="->"){
+            sig = (nodoA) => { return nodoA.siguiente }
             return sig(nodo)
-        }else if(SA="<-"){
-            ant = (nodoA) => { nodoA.anterior }
+        }else if(SA=="<-"){
+            ant = (nodoA) => { return nodoA.anterior }
             return ant(nodo)
-        }else if(SA="="){
+        }else if(SA=="="){
             return nodo
         }
     }
@@ -34,9 +34,9 @@ export class ldEnlazada {
         if(nodo==null){//por si es la primera vez
             nodo=this.lc
         }
-        nodo=this.move( nodo,SA)
-        var nombre = nodo.info.GetDatos()["name"]
-        var duracion = nodo.info.GetDatos()["duration"]
+        let Nodo=this.move( nodo,SA)
+        var nombre = Nodo.info.GetDatos()["name"]
+        var duracion = Nodo.info.GetDatos()["duration"]
         let btnHtml = `
         <div class="d-4-cancion">
         <div class="d-cancion">
@@ -50,6 +50,6 @@ export class ldEnlazada {
         </div>
     </div>
     `
-    return {html:btnHtml,nodo:nodo}
+    return {html:btnHtml,nodo:Nodo}
     }
 }

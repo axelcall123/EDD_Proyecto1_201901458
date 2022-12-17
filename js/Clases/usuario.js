@@ -1,7 +1,7 @@
 import { listaSimple } from "../Nodo_Listas/lSimple.js"
 import { ldEnlazada } from "../Nodo_Listas/lDEnalazada.js"
 export class Usuario {
-    constructor(dpi,name,username,password,phone,admin,playlist) {
+    constructor(dpi,name,username,password,phone,admin) {
         this.dpi = dpi
         this.name = name
         this.username = username

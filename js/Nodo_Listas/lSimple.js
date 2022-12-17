@@ -61,8 +61,8 @@ export class listaSimple {
         while(aux!=null){
             let dpi=aux.info.GetDatos()["dpi"]
             let user=aux.info.GetDatos()["username"]
-
-            contNodo = contNodo + `nodo_${cont} [${box} label="${dpi}\n${user}"]\n`
+            let pass = aux.info.GetDatos()["password"]
+            contNodo = contNodo + `nodo_${cont} [${box} label="${dpi}\n${user}\n${pass}"]\n`
             if(cont<this.tamano-1){
                 unionNodo = unionNodo + `nodo_${cont}->`
             }else{

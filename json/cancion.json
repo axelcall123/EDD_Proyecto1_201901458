@@ -22,5 +22,14 @@
             "G5",
             "G6"
         ]
+    },
+	{
+        "artist": "A5",
+        "name": "C4",
+        "duration": 2,
+        "gender": [
+            "G5",
+            "G6"
+        ]
     }
 ]

@@ -286,6 +286,10 @@ inpMMusic.addEventListener('change', function () {//cambia (e)=> a funciont()
 const bgM_user = document.getElementById("b-g-M-user")
 bgM_user.addEventListener('click', (e) => {
     //console.log(lsUsuario.graphviz())
+    const padre= document.getElementById("b-MGraph")//remover graphviz
+    while (padre.firstChild) {
+        padre.firstChild.remove()
+    }
     d3.select("#b-MGraph")
         .graphviz()
         .renderDot(lsUsuario.graphviz())
@@ -294,6 +298,10 @@ bgM_user.addEventListener('click', (e) => {
 const bgM_art = document.getElementById("b-g-M-artis")
 bgM_art.addEventListener('click', (e) => {
     //console.log(llArtista.graphviz())
+    const padre = document.getElementById("b-MGraph")//remover graphviz
+    while (padre.firstChild) {
+        padre.firstChild.remove()
+    }
     d3.select("#b-MGraph")
         .graphviz()
         .renderDot(llArtista.graphviz())
@@ -302,6 +310,10 @@ bgM_art.addEventListener('click', (e) => {
 const bgM_musica = document.getElementById("b-g-M-musicp")
 bgM_musica.addEventListener('click', (e) => {
     //console.log(matrizM.graphviz())
+    const padre = document.getElementById("b-MGraph")//remover graphviz
+    while (padre.firstChild) {
+        padre.firstChild.remove()
+    }
     d3.select("#b-MGraph")
         .graphviz()
         .renderDot(matrizM.graphviz())
@@ -310,6 +322,10 @@ bgM_musica.addEventListener('click', (e) => {
 const bgM_podcast = document.getElementById("b-g-M-podcast")
 bgM_podcast.addEventListener('click', (e) => {
     //console.log(abPod.graphviz())
+    const padre = document.getElementById("b-MGraph")//remover graphviz
+    while (padre.firstChild) {
+        padre.firstChild.remove()
+    }
     d3.select("#b-MGraph")
         .graphviz()
         .renderDot(abPod.graphviz())
@@ -321,6 +337,31 @@ btnMOut.addEventListener('click', (e) => {
     ocultoPageLogin.style.display = "block";
 })
     //MAIN PAGE
+        //LOG 
+const btnPLogout = document.getElementById('b-index-log')
+btnPLogout.addEventListener('click', (e) => {
+    //MUSICA
+    ocultoPMusica.style.display = 'none';
+    //PLAY-LIST
+    ocultoPPL.style.display = 'none';
+    //ARTISTA
+    ocultoPArtista.style.display = 'none';
+    //AMIGOS
+    ocultoPAmigo.style.display = 'none';
+    //BLOQUEADOS
+    ocultoPBloqueado.style.display = 'none';
+    //PODCAST
+    ocultoPPodC.style.display = 'none';
+
+    ocultoNav.style.display = 'none';
+    ocultoPageMain.style.display = 'none';
+    ocultoPageLogin.style.display = "block";
+    
+    /*var padre = document.getElementById("d-main-page")//elimina todo los hijos por si las moscas
+    while (padre.firstChild) {
+        padre.firstChild.remove()
+    }*/
+})
         //MUSICA 
 const btnPMusica = document.getElementById('b-index-musica')
 btnPMusica.addEventListener('click', (e) => {
@@ -365,9 +406,12 @@ btnProgramar.addEventListener('click', (e) => {
     let arrayF = inpFecha.value.split("-")
     const nombre= document.getElementById("i-m-nombre")
     //const sonido = document.getElementById("i-m-album")
-    let reg = new Musica(arrayF[1], arrayF[2], nombre, logUser.GetDatos()["username"])
+    let reg = new Musica(arrayF[1], 
+        arrayF[2], 
+        nombre.value, 
+        logUser.info.GetDatos()["username"])
     
-    matrizM.insertarNodo(arrayF[2], arrayF[1], reg)
+    matrizM.insertarNodo(parseInt(arrayF[2]), parseInt(arrayF[1]), reg)
     let listaAux = matrizM.getHTML()
     while (listaAux["elemento"].vacio() != true) {//while de musica
         //despliego <elementos musica>
@@ -381,31 +425,31 @@ btnPublicar.addEventListener('click', (e) => {
     const sonido = document.getElementById("i-m-album")
     //name, age, country
     var reg = new Artista(
-        logUser.GetDatos()["username"],
+        logUser.info.GetDatos()["username"],
         0,
         "n"
     );
     llArtista.insertarUMain(reg);
     //artist, name, duration,gender
     reg = new Cancion(
-        logUser.GetDatos()["username"],
+        logUser.info.GetDatos()["username"],
         sonido,
         0,
         ["n"]
     )
-    llArtista.insertarPSub(element["artist"],reg);     
+    llArtista.insertarPSub(logUser.info.GetDatos()["username"],reg);     
 })
             //VER
 const btnMver= document.getElementById('bMVer')
 btnMver.addEventListener('click', (e) => {
-    padre = document.getElementById("d-musica-publicado") //elimina todo los hijos por si las moscas
+    let padre = document.getElementById("d-musica-publicado") //elimina todo los hijos por si las moscas
     while (padre.firstChild) {
         padre.firstChild.remove()
     }
     //año-mes-dia 0-1-2
     let arrayF=inpFecha.value.split("-")
     //buscar
-    let txtAux = matrizM.buscarXY(arrayF[2],arrayF[1])
+    let txtAux = matrizM.buscarXY(parseInt(arrayF[2]), parseInt(arrayF[1]))
     document.getElementById("d-musica-publicado").insertAdjacentHTML('beforeend', txtAux)
 })        
         //PLAYLIST
@@ -426,12 +470,12 @@ btnPPlayL.addEventListener('click', (e) => {
     ocultoPPodC.style.display = 'none';
     //FIXME:si ya hay
 
-    var padre = document.getElementById("d-Mamigo-user")//elimina todo los hijos por si las moscas
+    var padre = document.getElementById("d-m-p-playlist")//elimina todo los hijos por si las moscas
     while (padre.firstChild) {
         padre.firstChild.remove()
     }
-    let aux = logUser.info.GetPlayList().getHTML(null, "=")
-    btnHtml = aux["html"]
+    let aux = logUser.info.GetPlayList().getHtml(null, "=")
+    let btnHtml = aux["html"]
     playList = aux["nodo"]
     //despliego <elemento playList>
     document.getElementById("d-m-p-playlist").insertAdjacentHTML('beforeend', btnHtml)
@@ -439,12 +483,12 @@ btnPPlayL.addEventListener('click', (e) => {
             //SIG 
 const btnPPlayLs = document.getElementById('pl-sig')
 btnPPlayLs.addEventListener('click', (e) => {
-    var padre = document.getElementById("d-Mamigo-user")//elimina todo los hijos por si las moscas
+    var padre = document.getElementById("d-m-p-playlist")//elimina todo los hijos por si las moscas
     while (padre.firstChild) {
         padre.firstChild.remove()
     }
-    let aux = logUser.info.GetPlayList().getHTML(playList, "->")
-    btnHtml = aux["html"]
+    let aux = logUser.info.GetPlayList().getHtml(playList, "->")
+    let btnHtml = aux["html"]
     playList = aux["nodo"]
     //despliego <elemento playList>
     document.getElementById("d-m-p-playlist").insertAdjacentHTML('beforeend', btnHtml)
@@ -452,12 +496,12 @@ btnPPlayLs.addEventListener('click', (e) => {
             //ANT 
 const btnPPlayLa = document.getElementById('pl-ant')
 btnPPlayLa.addEventListener('click', (e) => {
-    var padre = document.getElementById("d-Mamigo-user")//elimina todo los hijos por si las moscas
+    var padre = document.getElementById("d-m-p-playlist")//elimina todo los hijos por si las moscas
     while (padre.firstChild) {
         padre.firstChild.remove()
     }
-    let aux = logUser.info.GetPlayList().getHTML(playList, "<-")
-    btnHtml = aux["html"]
+    let aux = logUser.info.GetPlayList().getHtml(playList, "<-")
+    let btnHtml = aux["html"]
     playList = aux["nodo"]
     //despliego <elemento playList>
     document.getElementById("d-m-p-playlist").insertAdjacentHTML('beforeend', btnHtml)
@@ -533,9 +577,11 @@ btnPArtista.addEventListener('click', (e) => {
             btnTempM.addEventListener('click', (e) => {
                 e.target.setAttribute("disabled", "disabled");//para no ser click
                 var temp = e.target.id.replace("b-MArt-mus-", "")
-                let ids = temp.split("-");//obtengo el id1(artista)-id2(musica)
-                let nodoUsuarioTemp = llArtista.buscarIDS(parseInt(ids[0],10), parseInt(ids[1],10))
-                logUser.info.GetPlayList().insertar(nodoUsuarioTemp)//agrego play list
+                if(temp!=""){
+                    let ids = temp.split('-');//obtengo el id1(artista)-id2(musica)
+                    let nodoUsuarioTemp = llArtista.buscarIDS(parseFloat(ids[0]), parseFloat(ids[1]))
+                    logUser.info.GetPlayList().insertar(nodoUsuarioTemp)//agrego play list
+                }              
             })
         }
     }
