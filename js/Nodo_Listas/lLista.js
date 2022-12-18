@@ -223,36 +223,43 @@ export class listaLista {
             aux=aux.siguiente
         }
     }
-    ordenZA(){
-        /*let getNodo=(pos)=>{
-            let aux=this.primero
+    ordenZA() {//https://codigojava.online/ordenacion-quicksort/
+        let GetNodo=(pos)=>{
+            aux=this.primero
             for(var i=0;i<pos;i++){
-                temp=temp.siguiente
+                aux=aux.siguiente
             }
             return aux
         }
-        let cambiar()
-        let partir=(min,max)=>{
-            let pivote=getNodo(max).info
-            let i=(min-1)
-            for(var j=min;j<=max-1;j++){
-
+        let quickSort=(izq,der)=>{
+            let pivote=new NodoLL(GetNodo(izq))
+            let i=iz
+            let j=der
+            let aux=null;
+            while(i<j){
                 let comparacion = ordenAlfa(
-                    pivote.info.GetDatos()["name"],
-                    getNodo(j).info.GetDatos()["name"]
+                    GetNodo[i].info.GetDatos()["name"],
+                    pivote.info.GetDatos()["name"]
                 )
-                if (comparacion["stru"] > comparacion["strd"]){
-                    i++
-                    
+                while (comparacion ["stru"]>=comparacion["strd"] && i<j) i++;
+                comparacion = ordenAlfa(
+                    GetNodo[j].info.GetDatos()["name"],
+                    pivote.info.GetDatos()["name"]
+                )
+                while (comparacion["strd"] < comparacion["stru"]) j--;
+                if(i<j){
+                    aux = new NodoLL(GetNodo(i))
+                    GetNodo[i].info=GetNodo[j].info
+                    GetNodo[j].info=aux.info;
+                }
+                GetNodo[izq].info=GetNodo[j].info;
+                GetNodo[j].info=pivote.info
+                if(izq<j-1){
+                    quickSort(izq, j - 1)
+                }if(j+1<der){
+                    quickSort(j+1,der)  
                 }
             }
         }
-
-        let ordenar=(min,max)=>{
-            if(min<max){
-                let pos=
-            }
-        }
-        ordenar(0,this.tamM-1)*/
     }
 }
