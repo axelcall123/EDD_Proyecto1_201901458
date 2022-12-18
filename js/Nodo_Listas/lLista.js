@@ -1,11 +1,13 @@
 import { NodoLL } from './Nodo.js'
 import { listaSimple } from './lSimple.js';
+import { ordenAlfa } from '../func/func.js';
 export class listaLista {
     constructor() {
         this.primero = null;
         this.ultimo = null;
         this.countId=1;
         this.subCId=1;
+        this.tamM=0;
     }
     insertarUMain(info) {
         /*[primero]
@@ -26,6 +28,7 @@ export class listaLista {
             
         }
         this.countId++;
+        this.tamM++;
     }
     insertarPSub(buscar, info) {
         //<-zn;->zp
@@ -197,5 +200,59 @@ export class listaLista {
             aux=aux.zp
         }
         return aux.info
+    }
+    ordenAZ(){
+        aux=this.primero
+        aux2=null
+        if(aux.sig!=null){
+            aux2=this.primero.siguiente
+        }
+        while(aux!=null){
+            while(aux2!=null){   
+                let comparacion=ordenAlfa(
+                    aux.info.GetDatos()["name"],
+                    aux2.info.GetDatos()["name"]
+                )
+                if (comparacion["stru"] > comparacion["strd"]){
+                    let temp = new NodoLL(aux.info)
+                    aux.info=aux2.info
+                    aux2.info=temp.info
+                }
+                aux2=aux2.siguiente
+            }
+            aux=aux.siguiente
+        }
+    }
+    ordenZA(){
+        /*let getNodo=(pos)=>{
+            let aux=this.primero
+            for(var i=0;i<pos;i++){
+                temp=temp.siguiente
+            }
+            return aux
+        }
+        let cambiar()
+        let partir=(min,max)=>{
+            let pivote=getNodo(max).info
+            let i=(min-1)
+            for(var j=min;j<=max-1;j++){
+
+                let comparacion = ordenAlfa(
+                    pivote.info.GetDatos()["name"],
+                    getNodo(j).info.GetDatos()["name"]
+                )
+                if (comparacion["stru"] > comparacion["strd"]){
+                    i++
+                    
+                }
+            }
+        }
+
+        let ordenar=(min,max)=>{
+            if(min<max){
+                let pos=
+            }
+        }
+        ordenar(0,this.tamM-1)*/
     }
 }

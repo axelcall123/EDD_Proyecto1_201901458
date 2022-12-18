@@ -586,6 +586,19 @@ btnPArtista.addEventListener('click', (e) => {
         }
     }
 })
+            //A-Z
+const btnPArtistaAZ = document.getElementById('b-a-z')
+btnPArtistaAZ.addEventListener('click', (e) => {
+    llArtista.ordenAZ()
+    btnPArtista.click()
+})
+
+            //Z-A
+const btnPArtistaZA = document.getElementById('b-z-a')
+btnPArtistaZA.addEventListener('click', (e) => {
+    llArtista.ordenZA()
+    btnPArtista.click()
+})
         //AMIGOS
             //AGREGAR
 const btnPAmigo = document.getElementById('b-index-Ami')
