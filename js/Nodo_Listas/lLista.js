@@ -223,7 +223,7 @@ export class listaLista {
             aux=aux.siguiente
         }
     }
-    ordenZA() {//https://codigojava.online/ordenacion-quicksort/
+    ordenZA(){//https://codigojava.online/ordenacion-quicksort/
         let GetNodo=(pos)=>{
             aux=this.primero
             for(var i=0;i<pos;i++){
@@ -241,12 +241,12 @@ export class listaLista {
                     GetNodo[i].info.GetDatos()["name"],
                     pivote.info.GetDatos()["name"]
                 )
-                while (comparacion ["stru"]>=comparacion["strd"] && i<j) i++;
+                while (comparacion ["strd"]<=comparacion["stru"] && i<j) i++;
                 comparacion = ordenAlfa(
                     GetNodo[j].info.GetDatos()["name"],
                     pivote.info.GetDatos()["name"]
                 )
-                while (comparacion["strd"] < comparacion["stru"]) j--;
+                while (comparacion["stru"] > comparacion["strd"]) j--;
                 if(i<j){
                     aux = new NodoLL(GetNodo(i))
                     GetNodo[i].info=GetNodo[j].info
