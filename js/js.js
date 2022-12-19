@@ -92,6 +92,8 @@ btnLogin.addEventListener('click',(e)=>{
             ocultoPageLogin.style.display = "none";
             ocultoNav.style.display = 'block';
             ocultoPageMain.style.display = 'block';
+
+            
         }
     } else {//contram,user,admin esta mal
         //agregar html
@@ -366,6 +368,51 @@ btnPLogout.addEventListener('click', (e) => {
     while (padre.firstChild) {
         padre.firstChild.remove()
     }*/
+    var padre = document.getElementById("d-musica-musica")//elimina todo los hijos por si las moscas
+    while (padre.firstChild) {
+        padre.firstChild.remove()
+    }
+    padre = document.getElementById("d-musica-publicado") //elimina todo los hijos por si las moscas
+    while (padre.firstChild) {
+        padre.firstChild.remove()
+    }
+    padre = document.getElementById("d-m-p-playlist")//elimina todo los hijos por si las moscas
+    while (padre.firstChild) {
+        padre.firstChild.remove()
+    }
+    padre = document.getElementById("d-artista-artista")//elimina todo los hijos por si las moscas
+    while (padre.firstChild) {
+        padre.firstChild.remove()
+    }
+    padre = document.getElementById("d-artista-musica") //elimina todo los hijos por si las moscas
+    while (padre.firstChild) {
+        padre.firstChild.remove()
+    }
+    padre = document.getElementById("d-Mamigo-user")//elimina todo los hijos por si las moscas
+    while (padre.firstChild) {
+        padre.firstChild.remove()
+    }
+    padre = document.getElementById("d-Mamigo-amigo") //elimina todo los hijos por si las moscas
+    while (padre.firstChild) {
+        padre.firstChild.remove()
+    }
+
+    padre = document.getElementById("d-Mbloqueado-user")//elimina todo los hijos por si las moscas
+    while (padre.firstChild) {
+        padre.firstChild.remove()
+    }
+    padre = document.getElementById("d-Mbloqueado-bloqueado") //elimina todo los hijos por si las moscas
+    while (padre.firstChild) {
+        padre.firstChild.remove()
+    }
+    padre = document.getElementById("d-podcast-musica")//elimina todo los hijos por si las moscas
+    while (padre.firstChild) {
+        padre.firstChild.remove()
+    }
+    padre = document.getElementById("d-podcast-musica")//elimina todo los hijos por si las moscas
+    while (padre.firstChild) {
+        padre.firstChild.remove()
+    }
 })
         //MUSICA 
 const btnPMusica = document.getElementById('b-index-musica')
