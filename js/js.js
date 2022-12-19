@@ -51,7 +51,12 @@ import { Musica } from './Clases/musica.js';
     //PODCAST
 import { PodCast } from './Clases/podcast.js';
 var usuario = new Usuario(
-    "0", "Alex", "GG", hash("1"), "12345678", true
+    "2654568452521", 
+    "Oscar Armin", 
+    "EDD", 
+    hash("123"), 
+    "1234567", 
+    true
 )
 //VAR LET CONST
 var addAdmin = true;
